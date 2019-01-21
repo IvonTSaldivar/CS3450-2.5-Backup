@@ -1,13 +1,57 @@
 # Repo-2.5
 
+## Organization, naming scheme 
+
+coding standard for python will be pep8
+django project will follow pydanny's cookiecutters basic stucture. See his github, or book two scoops of django for more details
+
+## Version control procedures
+
+To edit something make a new branch `git checkout -b name-of-branch`.
+Then make your changes, commit them. Push them to the remote repository on your branch
+create a pull request and have one other member of the team review your changes.
+when we get circleci running you should be able to see if all the unit tests pass.
+
+Rules:
+1 Don't edit master directly
+2 Always have master branch in a working state without errors.
+
+## Build instructions
+
 To get you project up and running you will need to have docker installed.
-
-after cloning the repo you will need to `cd Project' to change into the project folder
-
-Then run `docker-compose build' followed by `docker-compose up'
-
+after cloning the repo you will need to `cd Project` to change into the project folder
+Then run `docker-compose build' followed by `docker-compose up`
 project will be served to localhost:8000
 
+## Project Setup and tool stack
 
+The project is built on django wrapped up in a docker container, it is based of
+pydanny's cookiecutter django build. 
 
+Here is a list of the tools we are planning on using so far.
 
+docker - container for django
+django - python framework for webdev
+flake8 - pep8 linter
+pytest - unitesting program
+cookiecutter - project setup for real projects, much better than django's startproject command
+circleci - continuous integration and automated unitesting at every commit.
+git - version control.
+python3 - works with latest version of django.
+
+## Unit testing instructions
+
+In the project directory run the command 
+`docker-compose run --rm --service-ports web /bin/bash`
+then you will be inside the django shell. From here you will
+be able to run django's built in testing commands (see docs) or you can run pytest
+
+## System testing instructions
+
+Basically if `docker-compose-build` followed by `docker-compose up` works 
+it means everything is working correctly. Docker really simplfies things so 
+that we can all be developing on the same 'system'
+
+## Additional notes
+
+We will be adjusting this README as needed as the project develops
