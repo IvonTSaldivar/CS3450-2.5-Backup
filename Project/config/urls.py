@@ -19,6 +19,10 @@ urlpatterns = [
         "users/",
         include("movshare.users.urls", namespace="users"),
     ),
+    path(
+        "library/",
+        include("movshare.library.urls", namespace="library"),
+    ),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(
