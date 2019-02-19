@@ -15,4 +15,3 @@ def ShelfView(request):
                  )
 
 #user_list_view = UserListView.as_view()
-
