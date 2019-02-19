@@ -42,7 +42,7 @@ python3 - works with latest version of django.
 ## Unit testing instructions
 
 In the project directory run the command 
-`docker-compose run --rm --service-ports <name of container> /bin/bash`
+`docker-compose run --rm --service-ports django /bin/sh`
 to list names of containers run the command `docker ps`
 then you will be inside the django shell. From here you will
 be able to run django's built in testing commands (see docs) or you can run pytest (preferred)
