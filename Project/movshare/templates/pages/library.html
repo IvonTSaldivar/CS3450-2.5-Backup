@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for shelf in shelves %}
+      <h2>
+          {{ shelf.name }}
+      </h2>
+    {% endfor %}
+    {% for medium in media %}
+      <h2>
+          {{ medium.name }}
+      </h2>
+      <h3>
+        {{ medium.media_type}}
+      </h3>
+      <span>
+        {{ medium.description }}
+      </span>
+    {% endfor %}
+{% endblock content %}
