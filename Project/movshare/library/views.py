@@ -7,7 +7,7 @@ from movshare.library.models import Media
 def ShelfView(request):
     shelves = Shelf.objects.all();
     media = Media.objects.all();
-    return render(request, 'pages/dashboard.html', 
+    return render(request, 'pages/library.html', 
                     {
                        'shelves': shelves,
                        'media': media

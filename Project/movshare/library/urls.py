@@ -6,5 +6,5 @@ from movshare.library.views import (
 
 app_name = "library"
 urlpatterns = [
-    path("", view=ShelfView, name="shelf"),
+    path("shelf", view=ShelfView, name="shelf"),
 ]

@@ -16,6 +16,7 @@ class Shelf(models.Model):
 class Media(models.Model):
     name = models.CharField(max_length=255)
     media_type = models.CharField(max_length=255)
+    description = models.CharField(max_length=1000)
     owner = models.ForeignKey(
         User, related_name='Media', blank=True, null=True,
         on_delete=models.CASCADE,
