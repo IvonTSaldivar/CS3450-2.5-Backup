@@ -59,6 +59,20 @@ Basically if `docker-compose-build` followed by `docker-compose up` works
 it means everything is working correctly. Docker really simplfies things so 
 that we can all be developing on the same 'system'
 
-## Additional notes
+## making an Admin User and the Django admin
+
+enter the docker shell via the command 
+`docker-compose run --rm --service-ports django /bin/sh`
+
+run the command 
+`python manage.py createsuperuser`
+
+enter the credentials you will need to remember this
+but the password is on local so security is not an issue.
+then navigate to 
+
+`localhost:8000/admin` 
+
+login
 
 We will be adjusting this README as needed as the project develops
