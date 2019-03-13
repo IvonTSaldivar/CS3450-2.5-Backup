@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
     {% for shelf in shelves %}
     <center>
       <h2>
@@ -17,12 +18,13 @@
       {% for medium in media %}
         {% if medium.shelf == shelf %}
           <tr>
-            <th>{{ medium.name }}</th>
-            <th>{{ medium.media_type}}</th>
-            <th>{{ medium.description }}</th>
+            <td>{{ medium.name }}</th>
+            <td>{{ medium.media_type}}</th>
+            <td>{{ medium.description }}</th>
           </tr>
           {% endif %}
         {% endfor %}
-      </table>
+      </table><br>
     {% endfor %}
+	</div>
 {% endblock content %}
