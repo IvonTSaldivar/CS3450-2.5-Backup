@@ -11,3 +11,51 @@
   background-color: #f2dede;
   border-color: #eed3d7;
 }
+
+#body-wrapper {
+	display: flex;
+	flex-direction: row;
+}
+
+#shelf-wrapper {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 80%;
+	overflow: hidden;
+}
+
+.shelf {
+	display: flex;
+	flex-direction: column;
+}
+
+.shelf-title {
+	display: flex;
+	flex-direction: row;
+	min-width: min-content;
+	justify-content: center;
+}
+
+.shelf-content {
+	display: flex;
+	flex-direction: row;
+	overflow: scroll;
+}
+
+.media-content {
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px dotted black;
+	min-width: 100px;
+	align-items: center;
+}
+
+.media {
+	display: flex; 
+	flex-direction: column;
+	border: 2px solid black;
+	padding: 5px;
+	margin: 4px;
+	flex: 0 0 100px;
+	align-items: center;
+	}
