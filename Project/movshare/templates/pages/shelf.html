@@ -2,36 +2,36 @@
 
 {% block content %}
 	<div id="body-wrapper">
-	<div id="sidebar-wrapper">
-		
-	</div>
-	<div id="shelf-wrapper">
-	<p> {{ user.username }} </p>
-    {% for shelf in shelves %}
-	{% if shelf.owner == user %}
-   <div class="shelf">
-	 <div class="shelf-title">
-		<h3>
-          {{ shelf.name }}
-		</h3>      
-     </div>
-	<div class="shelf-content">
-	{% for i in i|rjust:5 %}
- 	  {% for medium in media %}
-        {% if medium.shelf == shelf %}
-		<div class="media">
-           <div class="media-content"> {{ medium.name }}</div>
-           <div class="media-content"> {{ medium.media_type }}</div>
-           <div class="media-content"> {{ medium.description }}</div>
+		<div id="sidebar-wrapper">
+			
 		</div>
-          {% endif %}
-        {% endfor %}
-	{% endfor %}
-	</div>
-	</div>
-	{% endif %}
-    {% endfor %}
-	</div>
-	<br>
+		<div id="shelf-wrapper">
+			<p> {{ user.username }} </p>
+			{% for shelf in shelves %}
+				{% if shelf.owner == user %}
+				   <div class="shelf">
+						<div class="shelf-title">
+							<h3>
+							  {{ shelf.name }}
+							</h3>      
+						</div>
+						<div class="shelf-content">
+							{% for i in i|rjust:5 %}
+								{% for medium in media %}
+									{% if medium.shelf == shelf %}
+										<div class="media">
+										   <div class="media-content"> {{ medium.name }}</div>
+										   <div class="media-content"> {{ medium.media_type }}</div>
+										   <div class="media-content"> {{ medium.description }}</div>
+										</div>
+									{% endif %}
+								{% endfor %}
+							{% endfor %}
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+		<br>
 	</div>
 {% endblock content %}
