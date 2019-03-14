@@ -15,14 +15,31 @@
 #body-wrapper {
 	display: flex;
 	flex-direction: row;
+	flex-basis: 100%;
+	justify-content: space-between;
+}
+
+#sidebar-wrapper {
+	display: flex;
+	max-width: 10%;
+	flex-direction: column;
+}
+
+button.addX{
+	display:flex;
+	margin: 5px;
 }
 
 #shelf-wrapper {
 	display: flex;
 	flex-direction: column;
-	flex-basis: 80%;
 	overflow: hidden;
+	max-width: 80%;
 }
+
+
+
+
 
 .shelf {
 	display: flex;
@@ -40,6 +57,7 @@
 	display: flex;
 	flex-direction: row;
 	overflow: scroll;
+	min-height: 100px;
 }
 
 .media-content {
