@@ -39,8 +39,6 @@ button.addX{
 
 
 
-
-
 .shelf {
 	display: flex;
 	flex-direction: column;
@@ -76,4 +74,16 @@ button.addX{
 	margin: 4px;
 	flex: 0 0 100px;
 	align-items: center;
-	}
+}
+
+.media-table {
+
+}
+.media-table tr {
+
+}
+
+.media-table tr:nth-child(even){
+
+	background-color: rgba(169,169,169, .2);
+}
