@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<a href="{% url 'library:shelf' %}"><- Go Back</a>
+	<br><br>
+	<form method="POST" action="{% url 'library:newMedia' %}">
+		{% csrf_token %}
+		<div>
+			<label for="name">Media Name: </label>
+			<input type="text" id="name" name="name">
+		</div>
+		<div>
+			<label for="type">Media Type: </label>
+			<input type="text" id="type" name="type">
+		</div>
+		<div>
+			<label for="description">Description:</label>
+			<textarea type="text" id="description" name="description"></textarea>
+		</div>
+		<div>
+			<label for="shelf">Shelf Name:</label>
+			<select id="shelf" name="shelf">
+				{% for shelf in shelves %}
+					{% if shelf.owner == user %}
+						<option value="{{ shelf.name }}"> {{ shelf.name }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</div>
+
+		<div>
+			<button type="submit">Submit</button>
+		</div>
+	</form>
+{% endblock content %}
