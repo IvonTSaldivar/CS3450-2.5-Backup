@@ -47,7 +47,6 @@ def PostShelf(request):
 		s.save()
 	return redirect('library:shelf')
 	
-	
 def ExpandedShelf(request, shelf_name):
 	encoded = urllib.parse.quote_plus(shelf_name)
 	print('encoding!')
@@ -57,7 +56,6 @@ def EncodedShelf(request, encoded_shelf):
 	decoded = urllib.parse.unquote(encoded_shelf)
 	shelf = Shelf.objects.get(name=decoded)
 	medias = Media.objects.all()
-	print('decoding!')
 	return render(request, 'pages/shelfViews/expandedshelf.html',
 					{
 						'shelf': shelf,
