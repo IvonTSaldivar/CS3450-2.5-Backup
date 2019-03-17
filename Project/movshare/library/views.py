@@ -14,7 +14,7 @@ def ShelfView(request):
     if 'search' in request.GET:
         search_term = request.GET['search']
         media = Media.objects.filter(name__icontains = search_term)
-        shelves = media.shelf
+        #shelves = media.shelf
 
 
     return render(request, 'pages/shelf.html', 
