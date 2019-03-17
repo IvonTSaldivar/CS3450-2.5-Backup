@@ -68,6 +68,11 @@ button.addX{
 	min-width: 90px;
 }
 
+.delete-shelf {
+	display: flex;
+	float:right;
+}
+
 .media {
 	display: flex; 
 	flex-direction: column;

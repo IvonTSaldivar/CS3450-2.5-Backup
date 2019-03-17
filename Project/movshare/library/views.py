@@ -80,5 +80,6 @@ def DeleteMedia(request):
 					owner=request.user)
 	shelfName = request.POST.get('shelf_name')
 	media.delete()
-	return redirect('library:encodedshelf', shelf_name=shelfName)
+	destination = '/library/shelf/%s' % (shelfName)
+	return redirect(destination)
 		
