@@ -8,12 +8,20 @@ import urllib.parse
 # Create your views here.
 
 def ShelfView(request):
+    search_term = ''
     shelves = Shelf.objects.all();
     media = Media.objects.all();
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        media = Media.objects.filter(name__icontains = search_term)
+        shelves = media.shelf
+
+
     return render(request, 'pages/shelf.html', 
                     {
                        'shelves': shelves,
-                       'media': media
+                       'media': media,
+                       'search_term': search_term
                      }
                  )
 

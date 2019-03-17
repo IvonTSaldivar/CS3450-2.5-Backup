@@ -3,11 +3,14 @@
 {% block content %}
 	<div id="body-wrapper">
 		<div id="sidebar-wrapper">
+        	<br>
 			<form action="{% url 'library:addMedia' %}">
-				<button type="sumbit">Add Media</button>
+				<button class="btn btn-outline-primary my-2 my-sm-0" 
+						type="sumbit">Add Media</button>
 			</form>
 			<form action="{% url 'library:addShelf' %}">
-				<button type="sumbit">Add Shelf</button>
+				<button class="btn btn-outline-primary my-2 my-sm-0"
+						type="sumbit">Add Shelf</button>
 			</form>
 		</div>
 		<div id="shelf-wrapper">
