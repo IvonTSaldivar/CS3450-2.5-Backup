@@ -55,15 +55,17 @@ button.addX{
 	display: flex;
 	flex-direction: row;
 	overflow: scroll;
-	min-height: 100px;
 }
 
 .media-content {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 1px dotted black;
-	min-width: 100px;
 	align-items: center;
+}
+
+.underline {
+	border-bottom: 1px dotted black;
+	min-width: 90px;
 }
 
 .media {
@@ -74,6 +76,11 @@ button.addX{
 	margin: 4px;
 	flex: 0 0 100px;
 	align-items: center;
+	text-align: center;
+	height: 150px;
+	max-width: 100px;
+	
+
 }
 
 .media-table {

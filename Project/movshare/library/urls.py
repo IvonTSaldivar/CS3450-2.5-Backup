@@ -1,7 +1,9 @@
 from django.urls import path
 
 from movshare.library.views import (
-    ShelfView, AddMediaView, AddShelfView, PostMedia, PostShelf, ExpandedShelf, EncodedShelf,
+    ShelfView, AddMediaView, AddShelfView, 
+	PostMedia, PostShelf, ExpandedShelf,
+	EncodedShelf, DeleteMedia,
 )
 
 app_name = 'library'
@@ -13,4 +15,5 @@ urlpatterns = [
 	path('addShelf', view=AddShelfView, name='addShelf'),
 	path('newMedia', view=PostMedia, name='newMedia'),
 	path('newShelf', view=PostShelf, name='newShelf'),
+	path('deleteMedia', view=DeleteMedia, name='deleteMedia'),
 ]

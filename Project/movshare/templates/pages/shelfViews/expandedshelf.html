@@ -16,6 +16,13 @@
             <td>{{ medium.name }}</td>
             <td>{{ medium.media_type}}</td>
             <td>{{ medium.description }}</td>
+			<td>
+				<form method="POST" action="{% url 'library:deleteMedia' %}" id="form">
+					{% csrf_token %}
+					<input type="hidden" name="media_name" value="{{ medium.name }}">
+					<input type="hidden" name="shelf_name" value="{{ medium.shelf.name|urlencode }}">
+					<a href="#" onclick="document.getElementById('form').submit();">delete</div>
+				</form>
           </tr>
           {% endif %}
         {% endfor %}
