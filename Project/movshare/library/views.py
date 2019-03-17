@@ -66,7 +66,7 @@ def ExpandedShelf(request, shelf_name):
 	
 def EncodedShelf(request, encoded_shelf):
 	decoded = urllib.parse.unquote(encoded_shelf)
-	shelf = Shelf.objects.get(name=decoded)
+	shelf = Shelf.objects.filter(name=decoded)
 	medias = Media.objects.all()
 	return render(request, 'pages/shelfViews/expandedshelf.html',
 					{
@@ -82,4 +82,9 @@ def DeleteMedia(request):
 	media.delete()
 	destination = '/library/shelf/%s' % (shelfName)
 	return redirect(destination)
-		
+	
+def DeleteShelf(request):
+	shelf = Shelf.objects.filter(name=request.POST.get('shelf_name'),
+					owner=request.user)
+	shelf.delete()
+	return redirect('library:shelf')
