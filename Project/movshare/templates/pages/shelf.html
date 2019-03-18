@@ -18,7 +18,7 @@
 				{% if shelf.owner == user %}
 				   <div class="shelf">
 						<div class="shelf-title">
-							<a href="{% url 'library:encodedshelf' shelf.name|urlencode %}"><h3>
+							<a href="{% url 'library:encodedshelf' user.username|urlencode shelf.name|urlencode %}"><h3>
 							  {{ shelf.name }}
 							</h3></a>
 						</div>

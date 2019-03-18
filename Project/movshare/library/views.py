@@ -8,22 +8,24 @@ import urllib.parse
 # Create your views here.
 
 def ShelfView(request):
-    search_term = ''
-    shelves = Shelf.objects.all();
-    media = Media.objects.all();
-    if 'search' in request.GET:
-        search_term = request.GET['search']
-        media = Media.objects.filter(name__icontains = search_term)
-        #shelves = media.shelf
+	search_term = ''
+	shelves = Shelf.objects.all();
+	media = Media.objects.all();
+	if 'search' in request.GET:
+		search_term = request.GET['search']
+		media = Media.objects.filter(name__icontains = search_term)
+		#shelves = media.shelf
+	if shelves.filter(owner=request.user).count() == 0 or shelves.filter(name='Default', owner=request.user).count() == 0:
+		shelf = Shelf(name='Default', owner=request.user)
+		shelf.save()
 
-
-    return render(request, 'pages/shelf.html', 
+	return render(request, 'pages/shelf.html', 
                     {
-                       'shelves': shelves,
+                       'shelves': Shelf.objects.all(),
                        'media': media,
                        'search_term': search_term
-                     }
-                 )
+                    }
+                )
 
 #user_list_view = UserListView.as_view()
 
@@ -66,15 +68,11 @@ def PostShelf(request):
 						owner=request.user)
 		s.save()
 	return redirect('library:shelf')
+
 	
-def ExpandedShelf(request, shelf_name):
-	encoded = urllib.parse.quote_plus(shelf_name)
-	print('encoding!')
-	return redirect('library:encodedshelf',	encoded_shelf=encoded)
-	
-def EncodedShelf(request, encoded_shelf):
+def EncodedShelf(request, username, encoded_shelf):
 	decoded = urllib.parse.unquote(encoded_shelf)
-	shelf = Shelf.objects.filter(name=decoded)
+	shelf = Shelf.objects.get(name=decoded)
 	medias = Media.objects.all()
 	return render(request, 'pages/shelfViews/expandedshelf.html',
 					{
@@ -91,8 +89,16 @@ def DeleteMedia(request):
 	destination = '/library/shelf/%s' % (shelfName)
 	return redirect(destination)
 	
+	
 def DeleteShelf(request):
-	shelf = Shelf.objects.filter(name=request.POST.get('shelf_name'),
+	print(request.POST.get('shelf_name'))
+	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'),
 					owner=request.user)
-	shelf.delete()
+	if current_shelf.name != 'Default':
+		media = Media.objects.filter(shelf=current_shelf)
+		default_shelf = Shelf.objects.get(name='Default', owner=request.user)
+		for medium in media:
+			medium.shelf = default_shelf
+			medium.save()
+		current_shelf.delete()
 	return redirect('library:shelf')
