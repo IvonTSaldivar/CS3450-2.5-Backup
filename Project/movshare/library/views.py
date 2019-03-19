@@ -10,7 +10,7 @@ import urllib.parse
 
 def ShelfView(request):
 	if not request.user.is_authenticated:
-		return redirect('/users/')
+		return redirect('/accounts/login/?next=/library/shelf')
 	if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default', owner=request.user).count() == 0:
 		shelf = Shelf(name='Default', owner=request.user)
 		shelf.save()
