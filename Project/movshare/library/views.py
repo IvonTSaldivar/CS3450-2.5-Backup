@@ -9,6 +9,8 @@ import urllib.parse
 # Create your views here.
 
 def ShelfView(request):
+	if not request.user.is_authenticated:
+		return redirect('/users/')
 	if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default', owner=request.user).count() == 0:
 		shelf = Shelf(name='Default', owner=request.user)
 		shelf.save()
