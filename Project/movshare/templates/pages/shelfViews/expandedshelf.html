@@ -19,20 +19,22 @@
 				<td>{{ medium.media_type}}</td>
 				<td>{{ medium.description }}</td>
 				<td class='url'>
-					<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
+					<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media_{{medium.name}}">
 						{% csrf_token %}
 						<input type="hidden" name="media_name" value="{{ medium.name }}">
 						<input type="hidden" name="shelf_name" value="{{ medium.shelf.name|urlencode }}">
-						<a href="#" onclick="document.getElementById('delete_media').submit();">delete</a>
+						<input type="hidden" name="user_name" value="{{ user.username|urlencode }}">
+						<a href="#" onclick="document.getElementById('delete_media_{{medium.name}}').submit();">delete</a>
 					</form>
 			</tr>
 		{% endif %}
 	{% endfor %}
 </table>
 	  <br>
-	  <div class="delete-shelf"><form method="POST" action="{% url 'library:deleteShelf' %}" id="delete_shelf">
-					{% csrf_token %}
-					<input type="hidden" name="shelf_name" value="{{ shelf.name }}">
-					<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
-				</form></div>
+	  <div class="delete-shelf">
+			<form method="POST" action="{% url 'library:deleteShelf'  %}" id="delete_shelf">
+				{% csrf_token %}
+				<input type="hidden" name="shelf_name" value="{{ shelf.name|urlencode }}">
+				<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
+			</form></div>
 {% endblock content %}

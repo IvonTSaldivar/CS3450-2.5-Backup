@@ -78,14 +78,14 @@ def EncodedShelf(request, username, encoded_shelf):
 def DeleteMedia(request):
 	media = Media.objects.get(name=request.POST.get('media_name'),
 					owner=request.user)
-	shelfName = request.POST.get('shelf_name')
+	encodedShelfName = request.POST.get('shelf_name')
+	encodedUserName = request.POST.get('user_name')
 	media.delete()
-	destination = '/library/shelf/%s' % (shelfName)
+	destination = '/library/shelf/%s/%s' % (encodedUserName, encodedShelfName)
 	return redirect(destination)
 	
 	
 def DeleteShelf(request):
-	print(request.POST.get('shelf_name'))
 	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'),
 					owner=request.user)
 	if current_shelf.name != 'Default':

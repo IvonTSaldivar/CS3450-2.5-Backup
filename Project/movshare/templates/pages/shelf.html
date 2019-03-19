@@ -24,7 +24,6 @@
 								</h3></a>
 							</div>
 							<div class="shelf-content">
-								{% for i in i|rjust:5 %}
 									{% for medium in media %}
 										{% if medium.shelf == shelf %}
 											<div class="media">
@@ -34,7 +33,6 @@
 											</div>
 										{% endif %}
 									{% endfor %}
-								{% endfor %}
 							</div>
 						</div>
 					{% endif %}
