@@ -57,12 +57,6 @@ button.addX{
 	overflow: scroll;
 }
 
-.media-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 .underline {
 	border-bottom: 1px dotted black;
 	min-width: 90px;
@@ -73,8 +67,15 @@ button.addX{
 	float:right;
 }
 
+.media-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	line-height: 1.2;
+	padding-bottom: 5px;
+}
 .media {
-	display: flex; 
+	display: flex;
 	flex-direction: column;
 	border: 2px solid black;
 	padding: 5px;
@@ -91,8 +92,15 @@ button.addX{
 .media-table {
 
 }
-.media-table tr {
+.media-table td, .media-table th {
+	padding-left: 15px;
+	min-width: 125px;
+}
 
+
+.url {
+	text-align: right;
+	padding-right: 10px;
 }
 
 .media-table tr:nth-child(even){

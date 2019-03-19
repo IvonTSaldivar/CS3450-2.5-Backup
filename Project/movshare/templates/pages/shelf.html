@@ -1,44 +1,46 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div id="body-wrapper">
-		<div id="sidebar-wrapper">
-        	<br>
-			<form action="{% url 'library:addMedia' %}">
-				<button class="btn btn-outline-primary my-2 my-sm-0" 
-						type="sumbit">Add Media</button>
-			</form>
-			<form action="{% url 'library:addShelf' %}">
-				<button class="btn btn-outline-primary my-2 my-sm-0"
-						type="sumbit">Add Shelf</button>
-			</form>
-		</div>
-		<div id="shelf-wrapper">
-			{% for shelf in shelves %}
-				{% if shelf.owner == user %}
-				   <div class="shelf">
-						<div class="shelf-title">
-							<a href="{% url 'library:encodedshelf' user.username|urlencode shelf.name|urlencode %}"><h3>
-							  {{ shelf.name }}
-							</h3></a>
-						</div>
-						<div class="shelf-content">
-							{% for i in i|rjust:5 %}
-								{% for medium in media %}
-									{% if medium.shelf == shelf %}
-										<div class="media">
-										   <div class="media-content underline"> {{ medium.name|truncatechars:28 }}</div>
-										   <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
-										   <div class="media-content"> {{ medium.description|truncatechars:25 }}</div>
-										</div>
-									{% endif %}
+	{% if user.is_authenticated %}
+		<div id="body-wrapper">
+			<div id="sidebar-wrapper">
+				<br>
+				<form action="{% url 'library:addMedia' %}">
+					<button class="btn btn-outline-primary my-2 my-sm-0" 
+							type="sumbit">Add Media</button>
+				</form>
+				<form action="{% url 'library:addShelf' %}">
+					<button class="btn btn-outline-primary my-2 my-sm-0"
+							type="sumbit">Add Shelf</button>
+				</form>
+			</div>
+			<div id="shelf-wrapper">
+				{% for shelf in shelves %}
+					{% if shelf.owner == user %}
+					   <div class="shelf">
+							<div class="shelf-title">
+								<a href="{% url 'library:encodedshelf' user.username|urlencode shelf.name|urlencode %}"><h3>
+								  {{ shelf.name }}
+								</h3></a>
+							</div>
+							<div class="shelf-content">
+								{% for i in i|rjust:5 %}
+									{% for medium in media %}
+										{% if medium.shelf == shelf %}
+											<div class="media">
+											   <div class="media-content underline"> {{ medium.name|truncatechars:28 }}</div>
+											   <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
+											   <div class="media-content"> {{ medium.description|truncatechars:25 }}</div>
+											</div>
+										{% endif %}
+									{% endfor %}
 								{% endfor %}
-							{% endfor %}
+							</div>
 						</div>
-					</div>
-				{% endif %}
-			{% endfor %}
+					{% endif %}
+				{% endfor %}
+			</div>
+			<br>
 		</div>
-		<br>
-	</div>
+	{% endif %}
 {% endblock content %}

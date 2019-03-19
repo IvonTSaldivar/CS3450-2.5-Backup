@@ -2,30 +2,24 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 import urllib.parse
 
 
 # Create your views here.
 
 def ShelfView(request):
-	search_term = ''
-	shelves = Shelf.objects.all();
-	media = Media.objects.all();
-	if 'search' in request.GET:
-		search_term = request.GET['search']
-		media = Media.objects.filter(name__icontains = search_term)
-		#shelves = media.shelf
-	if shelves.filter(owner=request.user).count() == 0 or shelves.filter(name='Default', owner=request.user).count() == 0:
+	if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default', owner=request.user).count() == 0:
 		shelf = Shelf(name='Default', owner=request.user)
 		shelf.save()
-
+	shelves = Shelf.objects.all()
+	media = Media.objects.all();
 	return render(request, 'pages/shelf.html', 
-                    {
-                       'shelves': Shelf.objects.all(),
-                       'media': media,
-                       'search_term': search_term
-                    }
-                )
+					{
+						'shelves': shelves,
+						'media': media,
+						}
+				)
 
 #user_list_view = UserListView.as_view()
 
@@ -102,3 +96,17 @@ def DeleteShelf(request):
 			medium.save()
 		current_shelf.delete()
 	return redirect('library:shelf')
+	
+def Search(request):
+	search_term = ''
+	if 'search' in request.GET:
+		search_term = request.GET['search']
+		media = Media.objects.filter(Q(name__icontains = search_term) | Q(media_type__icontains = search_term) | Q(description__icontains = search_term))
+	else:
+		media = Media.objects.none()
+	return render(request, 'pages/search.html',
+					{
+						'search_term': search_term,
+						'search_results': media
+					}
+				)

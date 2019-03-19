@@ -1,36 +1,38 @@
 {% extends "base.html" %}
 
 {% block content %}
+<a href="{% url 'library:shelf' %}"><- Go Back</a>
+	<br><br>
 	<h3>
 		{{ shelf.name }}
 	</h3>
-	<table style="width:100%" class="media-table">
-      <tr>
-        <th>Title</th>
-        <th>Media Type</th>
-        <th>Description</th>
-      </tr>
-      {% for medium in media %}
-        {% if medium.shelf == shelf %}
-          <tr>
-            <td>{{ medium.name }}</td>
-            <td>{{ medium.media_type}}</td>
-            <td>{{ medium.description }}</td>
-			<td>
-				<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
-					{% csrf_token %}
-					<input type="hidden" name="media_name" value="{{ medium.name }}">
-					<input type="hidden" name="shelf_name" value="{{ medium.shelf.name|urlencode }}">
-					<a href="#" onclick="document.getElementById('delete_media').submit();">delete</div>
-				</form>
-          </tr>
-          {% endif %}
-        {% endfor %}
-      </table>
-
+<table style="width:100%" class="media-table">
+	<tr>
+		<th>Title</th>
+		<th>Media Type</th>
+		<th>Description</th>
+	</tr>
+	{% for medium in media %}
+		{% if medium.shelf == shelf %}
+			<tr>
+				<td>{{ medium.name }}</td>
+				<td>{{ medium.media_type}}</td>
+				<td>{{ medium.description }}</td>
+				<td class='url'>
+					<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
+						{% csrf_token %}
+						<input type="hidden" name="media_name" value="{{ medium.name }}">
+						<input type="hidden" name="shelf_name" value="{{ medium.shelf.name|urlencode }}">
+						<a href="#" onclick="document.getElementById('delete_media').submit();">delete</a>
+					</form>
+			</tr>
+		{% endif %}
+	{% endfor %}
+</table>
+	  <br>
 	  <div class="delete-shelf"><form method="POST" action="{% url 'library:deleteShelf' %}" id="delete_shelf">
 					{% csrf_token %}
 					<input type="hidden" name="shelf_name" value="{{ shelf.name }}">
-					<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</div>
+					<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
 				</form></div>
 {% endblock content %}
