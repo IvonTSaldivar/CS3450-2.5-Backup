@@ -1,6 +1,9 @@
 from .base import *  # noqa
 from .base import env
 
+AUTH_PASSWORD_VALIDATORS = []
+
+
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
