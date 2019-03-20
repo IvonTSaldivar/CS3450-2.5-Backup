@@ -75,4 +75,21 @@ then navigate to
 
 login
 
+## Good docker commands to remember
+
+how to daemonize a container, i.e. run in the background. `docker-compose up -d`
+NOTE, you won’t see any output (like errors if the container fails)
+unless you run `docker logs project_django_1`
+
+how to check which containers are currently running, etc. `docker ps`
+you can see if your container has exited do to an error or remind
+yourself that the container is named `project_django_1`
+
+how to get inside a container to use the shell that is already running.
+`docker-compose -it project_django_1 sh`
+
+you can get out of the shell using `exit` or ctrl-d
+
+you can see all containers even ones that currently aren’t running with `docker ps -a`
+
 We will be adjusting this README as needed as the project develops
