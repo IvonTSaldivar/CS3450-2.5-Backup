@@ -48,7 +48,7 @@ def PostMedia(request):
 						owner=request.user,
 						media_type=request.POST.get('type'),
 						description=request.POST.get('description'),
-						shelf=Shelf.objects.get(name=request.POST.get('shelf')))
+						shelf=Shelf.objects.get(name=request.POST.get('shelf'), owner=request.user))
 		m.save()
 	return redirect('library:shelf')
 	
@@ -68,7 +68,7 @@ def PostShelf(request):
 	
 def EncodedShelf(request, username, encoded_shelf):
 	decoded = urllib.parse.unquote(encoded_shelf)
-	shelf = Shelf.objects.get(name=decoded)
+	shelf = Shelf.objects.get(name=decoded, owner=request.user)
 	medias = Media.objects.all()
 	return render(request, 'pages/shelfViews/expandedshelf.html',
 					{
