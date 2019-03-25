@@ -20,8 +20,8 @@ jobs:
           - v1-dependencies-
 
       - run:
-            name: "Fix CIRCLE_WORKING_DIRECTORY"
-            command: ls
+            name: "Cd into project"
+            command: cd Project 
 
       - run:
           name: install dependencies
