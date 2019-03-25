@@ -10,7 +10,7 @@ jobs:
       - image: circleci/python:3.6.1
       - image: circleci/postgres:9.4
         environment:
-        - POSTGRES_USER=movShare
+        - POSTGRES_USER=movshare
         - USE_DOCKER=yes
         - DATABASE_URL=postgres://movshare:movshare@postgres:5432/movshare
       - image: postgres
