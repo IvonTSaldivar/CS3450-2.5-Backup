@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: install dependencies
-          command: pip install -r Project/requirements/local.txt
+          command: python -m pip install -r Project/requirements/local.txt
 
       - save_cache:
           paths:
