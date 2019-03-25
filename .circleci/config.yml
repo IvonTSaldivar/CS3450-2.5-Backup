@@ -51,9 +51,8 @@ jobs:
       # https://nose.readthedocs.io
       - run:
           name: run tests
-          command: |
-            . venv/bin/activate
-           pytest --verbose
+          command:
+           pytest --verbose Project/movshare
 
       - store_artifacts:
           path: test-reports
