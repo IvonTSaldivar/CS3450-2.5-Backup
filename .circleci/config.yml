@@ -26,6 +26,7 @@ jobs:
       - run:
           name: install dependencies
           command: cd Project; ls;
+          command: | 
             python3 -m venv venv
             . venv/bin/activate
             pip install -r requirements/local.txt
