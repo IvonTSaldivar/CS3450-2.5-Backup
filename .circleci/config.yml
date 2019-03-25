@@ -51,7 +51,7 @@ jobs:
       # https://nose.readthedocs.io
       - run:
           name: run tests
-          command: python -m pytest --verbose Project/movshare
+          command: python3 -m pytest --verbose Project/movshare
 
       - store_artifacts:
           path: test-reports
