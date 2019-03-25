@@ -21,9 +21,7 @@ jobs:
 
       - run:
             name: "Fix CIRCLE_WORKING_DIRECTORY"
-            command: echo 'CIRCLE_WORKING_DIRECTORY="${CIRCLE_WORKING_DIRECTORY/#\~/$HOME}"' >> $BASH_ENV
-
-
+            command: ls
 
       - run:
           name: install dependencies
