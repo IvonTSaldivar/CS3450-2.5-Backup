@@ -34,7 +34,7 @@
 	  <div class="delete-shelf">
 			<form method="POST" action="{% url 'library:deleteShelf'  %}" id="delete_shelf">
 				{% csrf_token %}
-				<input type="hidden" name="shelf_name" value="{{ shelf.name|urlencode }}">
+				<input type="hidden" name="shelf_name" value="{{ shelf.name }}">
 				<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
 			</form></div>
 {% endblock content %}

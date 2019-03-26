@@ -88,8 +88,7 @@ def DeleteMedia(request):
 	
 	
 def DeleteShelf(request):
-	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'),
-					owner=request.user)
+	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'), owner=request.user)
 	if current_shelf.name != 'Default':
 		media = Media.objects.filter(shelf=current_shelf)
 		default_shelf = Shelf.objects.get(name='Default', owner=request.user)
