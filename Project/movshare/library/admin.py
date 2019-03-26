@@ -1,15 +1,15 @@
-#from django.contrib import admin
+# from django.contrib import admin
 #
 ## Register your models here.
 #
-#from django.contrib.auth import admin as auth_admin
-#from movshare.users.forms import UserChangeForm, UserCreationForm
+# from django.contrib.auth import admin as auth_admin
+# from movshare.users.forms import UserChangeForm, UserCreationForm
 #
-#User = get_user_model()
+# User = get_user_model()
 #
 #
-#@admin.register(User)
-#class ShelfAdmin(auth_admin.ShelfAdmin):
+# @admin.register(User)
+# class ShelfAdmin(auth_admin.ShelfAdmin):
 #
 #    add_form = UserCreationForm
 #    fieldsets = (("User", {"fields": ("name",)}),) + auth_admin.UserAdmin.fieldsets
@@ -20,10 +20,12 @@ from django.contrib import admin
 
 from movshare.library.models import Shelf, Media
 
+
 @admin.register(Shelf)
 class ShelfAdmin(admin.ModelAdmin):
-	list_display = ('name','owner',)
+    list_display = ('name', 'owner',)
+
 
 @admin.register(Media)
 class MediaAdmin(admin.ModelAdmin):
-	list_display = ('name','media_type','owner','shelf',)
+    list_display = ('name', 'media_type', 'owner', 'shelf',)

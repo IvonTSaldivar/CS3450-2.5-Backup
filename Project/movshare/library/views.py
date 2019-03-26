@@ -9,33 +9,37 @@ import urllib.parse
 # Create your views here.
 
 def ShelfView(request):
-	if not request.user.is_authenticated:
-		return redirect('/accounts/login/?next=/library/shelf')
-	if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default', owner=request.user).count() == 0:
-		shelf = Shelf(name='Default', owner=request.user)
-		shelf.save()
-	shelves = Shelf.objects.all()
-	media = Media.objects.all();
-	return render(request, 'pages/shelf.html', 
-					{
-						'shelves': shelves,
-						'media': media,
-						}
-				)
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/?next=/library/shelf')
+    if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default',
+                                                                                     owner=request.user).count() == 0:
+        shelf = Shelf(name='Default', owner=request.user)
+        shelf.save()
+    shelves = Shelf.objects.all()
+    media = Media.objects.all();
+    return render(request, 'pages/shelf.html',
+                  {
+                      'shelves': shelves,
+                      'media': media,
+                  }
+                  )
 
-#user_list_view = UserListView.as_view()
+
+# user_list_view = UserListView.as_view()
 
 def AddMediaView(request):
-	shelves = Shelf.objects.all();
-	return render(request, 'pages/shelfViews/addmedia.html',
-					{
-						'shelves': shelves
-					 }
-				 )
-	
+    shelves = Shelf.objects.all();
+    return render(request, 'pages/shelfViews/addmedia.html',
+                  {
+                      'shelves': shelves
+                  }
+                  )
+
+
 def AddShelfView(request):
-	return render(request, 'pages/shelfViews/addshelf.html')
-	
+    return render(request, 'pages/shelfViews/addshelf.html')
+
+
 def PostMedia(request):
 	if request.method == 'POST':
 		count = Media.objects.filter(name=request.POST.get('name'), owner=request.user).count()
@@ -53,19 +57,19 @@ def PostMedia(request):
 	return redirect('library:shelf')
 	
 def PostShelf(request):
-	if request.method == 'POST':
-		count = Shelf.objects.filter(name=request.POST.get('name'), owner=request.user).count()
-		shelfName = ''
-		if count != 0:
-			shelfName = "%s (%d)" % (request.POST.get('name'), count)
-		else:
-			shelfName = request.POST.get('name')
-		s = Shelf(name=shelfName,
-						owner=request.user)
-		s.save()
-	return redirect('library:shelf')
+    if request.method == 'POST':
+        count = Shelf.objects.filter(name=request.POST.get('name'), owner=request.user).count()
+        shelfName = ''
+        if count != 0:
+            shelfName = "%s (%d)" % (request.POST.get('name'), count)
+        else:
+            shelfName = request.POST.get('name')
+        s = Shelf(name=shelfName,
+                  owner=request.user)
+        s.save()
+    return redirect('library:shelf')
 
-	
+
 def EncodedShelf(request, username, encoded_shelf):
 	decoded = urllib.parse.unquote(encoded_shelf)
 	shelf = Shelf.objects.get(name=decoded, owner=request.user)
@@ -78,15 +82,15 @@ def EncodedShelf(request, username, encoded_shelf):
 				)
 
 def DeleteMedia(request):
-	media = Media.objects.get(name=request.POST.get('media_name'),
-					owner=request.user)
-	encodedShelfName = request.POST.get('shelf_name')
-	encodedUserName = request.POST.get('user_name')
-	media.delete()
-	destination = '/library/shelf/%s/%s' % (encodedUserName, encodedShelfName)
-	return redirect(destination)
-	
-	
+    media = Media.objects.get(name=request.POST.get('media_name'),
+                              owner=request.user)
+    encodedShelfName = request.POST.get('shelf_name')
+    encodedUserName = request.POST.get('user_name')
+    media.delete()
+    destination = '/library/shelf/%s/%s' % (encodedUserName, encodedShelfName)
+    return redirect(destination)
+
+
 def DeleteShelf(request):
 	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'), owner=request.user)
 	if current_shelf.name != 'Default':
@@ -99,15 +103,16 @@ def DeleteShelf(request):
 	return redirect('library:shelf')
 	
 def Search(request):
-	search_term = ''
-	if 'search' in request.GET:
-		search_term = request.GET['search']
-		media = Media.objects.filter(Q(name__icontains = search_term) | Q(media_type__icontains = search_term) | Q(description__icontains = search_term))
-	else:
-		media = Media.objects.none()
-	return render(request, 'pages/search.html',
-					{
-						'search_term': search_term,
-						'search_results': media
-					}
-				)
+    search_term = ''
+    if 'search' in request.GET:
+        search_term = request.GET['search']
+        media = Media.objects.filter(Q(name__icontains=search_term) | Q(media_type__icontains=search_term) | Q(
+            description__icontains=search_term))
+    else:
+        media = Media.objects.none()
+    return render(request, 'pages/search.html',
+                  {
+                      'search_term': search_term,
+                      'search_results': media
+                  }
+                  )
