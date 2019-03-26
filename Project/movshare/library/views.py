@@ -41,22 +41,21 @@ def AddShelfView(request):
 
 
 def PostMedia(request):
-    if request.method == 'POST':
-        count = Media.objects.filter(name=request.POST.get('name'), owner=request.user).count()
-        mediaName = ''
-        if count != 0:
-            mediaName = "%s (%d)" % (request.POST.get('name'), count)
-        else:
-            mediaName = request.POST.get('name')
-        m = Media(name=mediaName,
-                  owner=request.user,
-                  media_type=request.POST.get('type'),
-                  description=request.POST.get('description'),
-                  shelf=Shelf.objects.get(name=request.POST.get('shelf')))
-        m.save()
-    return redirect('library:shelf')
-
-
+	if request.method == 'POST':
+		count = Media.objects.filter(name=request.POST.get('name'), owner=request.user).count()
+		mediaName = ''
+		if count != 0:
+			mediaName = "%s (%d)" % (request.POST.get('name'), count)
+		else:
+			mediaName = request.POST.get('name')
+		m = Media(name=mediaName,
+						owner=request.user,
+						media_type=request.POST.get('type'),
+						description=request.POST.get('description'),
+						shelf=Shelf.objects.get(name=request.POST.get('shelf'), owner=request.user))
+		m.save()
+	return redirect('library:shelf')
+	
 def PostShelf(request):
     if request.method == 'POST':
         count = Shelf.objects.filter(name=request.POST.get('name'), owner=request.user).count()
@@ -72,16 +71,15 @@ def PostShelf(request):
 
 
 def EncodedShelf(request, username, encoded_shelf):
-    decoded = urllib.parse.unquote(encoded_shelf)
-    shelf = Shelf.objects.get(name=decoded)
-    medias = Media.objects.all()
-    return render(request, 'pages/shelfViews/expandedshelf.html',
-                  {
-                      'shelf': shelf,
-                      'media': medias
-                  }
-                  )
-
+	decoded = urllib.parse.unquote(encoded_shelf)
+	shelf = Shelf.objects.get(name=decoded, owner=request.user)
+	medias = Media.objects.all()
+	return render(request, 'pages/shelfViews/expandedshelf.html',
+					{
+						'shelf': shelf,
+						'media': medias
+					}
+				)
 
 def DeleteMedia(request):
     media = Media.objects.get(name=request.POST.get('media_name'),
@@ -94,18 +92,16 @@ def DeleteMedia(request):
 
 
 def DeleteShelf(request):
-    current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'),
-                                      owner=request.user)
-    if current_shelf.name != 'Default':
-        media = Media.objects.filter(shelf=current_shelf)
-        default_shelf = Shelf.objects.get(name='Default', owner=request.user)
-        for medium in media:
-            medium.shelf = default_shelf
-            medium.save()
-        current_shelf.delete()
-    return redirect('library:shelf')
-
-
+	current_shelf = Shelf.objects.get(name=request.POST.get('shelf_name'), owner=request.user)
+	if current_shelf.name != 'Default':
+		media = Media.objects.filter(shelf=current_shelf)
+		default_shelf = Shelf.objects.get(name='Default', owner=request.user)
+		for medium in media:
+			medium.shelf = default_shelf
+			medium.save()
+		current_shelf.delete()
+	return redirect('library:shelf')
+	
 def Search(request):
     search_term = ''
     if 'search' in request.GET:
