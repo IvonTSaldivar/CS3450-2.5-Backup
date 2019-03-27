@@ -6,9 +6,11 @@
 				{% for shelf in shelves %}
 					   <div class="shelf">
 							<div class="shelf-title">
-                <h3>
-								  {{ shelf.owner }} {{ shelf.name }}
-								</h3>
+                <a href="{% url 'library:viewonlyshelf' shelf.owner|urlencode shelf.name|urlencode %}">
+                  <h3>
+                    {{ shelf.owner }} {{ shelf.name }}
+                  </h3>
+                </a>
 							</div>
 							<div class="shelf-content">
 									{% for medium in media %}

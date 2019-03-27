@@ -3,13 +3,14 @@ from django.urls import path
 from movshare.library.views import (
     ShelfView, AddMediaView, AddShelfView,
     PostMedia, PostShelf, Search,
-    EncodedShelf, DeleteMedia, DeleteShelf,
+    EncodedShelf, ViewOnlyShelf, DeleteMedia, DeleteShelf,
 )
 
 app_name = 'library'
 urlpatterns = [
     path('shelf', view=ShelfView, name='shelf'),
     path('shelf/<str:username>/<str:encoded_shelf>', view=EncodedShelf, name='encodedshelf'),
+    path('shelf/view/<str:username>/<str:encoded_shelf>', view=ViewOnlyShelf, name='viewonlyshelf'),
     path('addMedia', view=AddMediaView, name='addMedia'),
     path('addShelf', view=AddShelfView, name='addShelf'),
     path('newMedia', view=PostMedia, name='newMedia'),

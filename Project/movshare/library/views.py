@@ -88,6 +88,17 @@ def EncodedShelf(request, username, encoded_shelf):
                   }
                   )
 
+def ViewOnlyShelf(request, username, encoded_shelf):
+    decoded = urllib.parse.unquote(encoded_shelf)
+    shelf = Shelf.objects.get(name=decoded, owner=request.user)
+    medias = Media.objects.all()
+    return render(request, 'pages/shelfViews/viewonly.html',
+                  {
+                      'shelf': shelf,
+                      'media': medias
+                  }
+                  )
+
 
 def DeleteMedia(request):
     media = Media.objects.get(name=request.POST.get('media_name'),
