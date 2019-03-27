@@ -4,12 +4,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
-from movshare.library.views import ShelfView
+from movshare.library.views import HomeView
 
 urlpatterns = [
     path(
         "",
-        view=ShelfView,
+        view=HomeView,
         name="home",
     ),
     path(

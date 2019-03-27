@@ -16,9 +16,15 @@ def ShelfView(request):
         shelf = Shelf(name='Default', owner=request.user)
         shelf.save()
     shelves = Shelf.objects.all()
-    media = Media.objects.all();
+    media = Media.objects.all()
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/shelf.html', context,)
+
+def HomeView(request):
+    shelves = Shelf.objects.all()
+    media = Media.objects.all()
+    context = {'shelves': shelves,'media': media,}
+    return render(request, 'pages/home.html', context,)
 
 # user_list_view = UserListView.as_view()
 
