@@ -21,8 +21,13 @@ def ShelfView(request):
     return render(request, 'pages/shelf.html', context,)
 
 def HomeView(request):
-    shelves = Shelf.objects.all()
+    shelves = set([])
+
     media = Media.objects.all()
+    for medium in media:
+        shelves.add(medium.shelf)
+
+    #shelves = Shelf.objects.all()
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/home.html', context,)
 
