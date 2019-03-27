@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
+from movshare.users.models import User
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
@@ -85,8 +86,10 @@ def EncodedShelf(request, username, encoded_shelf):
     return render(request, 'pages/shelfViews/expandedshelf.html', context,)
 
 def ViewOnlyShelf(request, username, encoded_shelf):
-    decoded = urllib.parse.unquote(encoded_shelf)
-    shelf = Shelf.objects.get(name=decoded, owner=request.user)
+    decodedShelf = urllib.parse.unquote(encoded_shelf)
+    #decodedUser = User.objects.get(name=username)
+    shelf = Shelf.objects.get(name=decodedShelf, owner=request.user)
+
     media = Media.objects.all()
     context = {'shelf': shelf, 'media': media, }
     return render(request, 'pages/shelfViews/viewonly.html',context,)
