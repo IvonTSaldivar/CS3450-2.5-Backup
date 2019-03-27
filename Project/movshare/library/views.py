@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
 
-
 # Create your views here.
 
 def ShelfView(request):
@@ -87,8 +86,10 @@ def EncodedShelf(request, username, encoded_shelf):
 
 def ViewOnlyShelf(request, username, encoded_shelf):
     decodedShelf = urllib.parse.unquote(encoded_shelf)
-    #decodedUser = User.objects.get(name=username)
-    shelf = Shelf.objects.get(name=decodedShelf, owner=request.user)
+    decodedUser = urllib.parse.unquote(username)
+    print(decodedUser)
+    user = User.objects.get(username=decodedUser)
+    shelf = Shelf.objects.get(name=decodedShelf, owner=user)
 
     media = Media.objects.all()
     context = {'shelf': shelf, 'media': media, }

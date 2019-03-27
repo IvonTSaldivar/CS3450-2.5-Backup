@@ -15,7 +15,17 @@ class Shelf(models.Model):
 
 class Media(models.Model):
     name = models.CharField(max_length=255)
-    media_type = models.CharField(max_length=255)
+    MOVIE_TYPE = "movie"
+    GAME_TYPE = "game"
+    MUSIC_TYPE = "music"
+
+    MEDIA_TYPE = (
+        (MOVIE_TYPE, "Movie"),
+        (GAME_TYPE, "Game"),
+        (MUSIC_TYPE, "Music"),
+    )
+
+    media_type = models.CharField(max_length=255, choices=MEDIA_TYPE)
     description = models.CharField(max_length=1000)
     owner = models.ForeignKey(
         User, related_name='Media', blank=True, null=True,
