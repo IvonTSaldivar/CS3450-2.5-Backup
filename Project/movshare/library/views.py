@@ -80,24 +80,16 @@ def PostShelf(request):
 def EncodedShelf(request, username, encoded_shelf):
     decoded = urllib.parse.unquote(encoded_shelf)
     shelf = Shelf.objects.get(name=decoded, owner=request.user)
-    medias = Media.objects.all()
-    return render(request, 'pages/shelfViews/expandedshelf.html',
-                  {
-                      'shelf': shelf,
-                      'media': medias
-                  }
-                  )
+    media = Media.objects.all()
+    context = {'shelf': shelf, 'media': media, }
+    return render(request, 'pages/shelfViews/expandedshelf.html', context,)
 
 def ViewOnlyShelf(request, username, encoded_shelf):
     decoded = urllib.parse.unquote(encoded_shelf)
     shelf = Shelf.objects.get(name=decoded, owner=request.user)
-    medias = Media.objects.all()
-    return render(request, 'pages/shelfViews/viewonly.html',
-                  {
-                      'shelf': shelf,
-                      'media': medias
-                  }
-                  )
+    media = Media.objects.all()
+    context = {'shelf': shelf, 'media': media, }
+    return render(request, 'pages/shelfViews/viewonly.html',context,)
 
 
 def DeleteMedia(request):

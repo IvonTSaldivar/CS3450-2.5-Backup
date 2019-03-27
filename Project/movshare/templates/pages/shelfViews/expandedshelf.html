@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'library:shelf' %}"><- Go Back</a>
+<a href="{% url 'library:shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
 	<br><br>
 	<h3>
 		{{ shelf.name }}
