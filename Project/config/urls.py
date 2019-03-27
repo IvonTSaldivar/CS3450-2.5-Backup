@@ -28,6 +28,11 @@ urlpatterns = [
         "library/",
         include("movshare.library.urls", namespace="library"),
     ),
+    path(
+        "loans/",
+        include("movshare.loans.urls", namespace="loans"),
+    ),
+
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(
