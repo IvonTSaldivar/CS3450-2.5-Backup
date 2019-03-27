@@ -17,4 +17,5 @@ urlpatterns = [
     path('deleteMedia', view=DeleteMedia, name='deleteMedia'),
     path('deleteShelf', view=DeleteShelf, name='deleteShelf'),
     path('search', view=Search, name='search'),
+    path('', view=ShelfView, name='home'),
 ]

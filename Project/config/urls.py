@@ -4,9 +4,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from movshare.library.views import ShelfView
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path(
+        "",
+        view=ShelfView,
+        name="home",
+    ),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
@@ -28,6 +33,8 @@ urlpatterns = [
         "library/",
         include("movshare.library.urls", namespace="library"),
     ),
+
+
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
 ] + static(
