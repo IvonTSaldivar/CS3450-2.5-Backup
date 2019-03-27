@@ -69,9 +69,10 @@ THIRD_PARTY_APPS = [
     'rest_framework',
 ]
 LOCAL_APPS = [
+    # Your stuff: custom apps go here
     'movshare.users.apps.UsersAppConfig',
     'movshare.library.apps.LibraryConfig',
-    # Your stuff: custom apps go here
+    'movshare.loans.apps.LoansConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
