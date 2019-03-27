@@ -27,9 +27,9 @@
 									{% for medium in media %}
 										{% if medium.shelf == shelf %}
 											<div class="media">
-											   <div class="media-content underline"> {{ medium.name|truncatechars:28 }}</div>
+											   <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
 											   <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
-											   <div class="media-content"> {{ medium.description|truncatechars:25 }}</div>
+											   <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
 											</div>
 										{% endif %}
 									{% endfor %}
