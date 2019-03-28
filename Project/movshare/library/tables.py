@@ -1,7 +1,12 @@
-import django_tables2 as tables
+from django_tables2 import tables, TemplateColumn
 from .models import Media
 
-class MediaTable(tables.Table):
+class SearchTable(tables.Table):
     class Meta:
         model = Media
+        attrs = {'class': 'table table-sm'}
+        fields = ['name', 'media_type', 'description', 'owner', 'shelf', 'loan']
         template_name = 'django_tables2/bootstrap.html'
+    loan = TemplateColumn(template_name='pages/tables/loanrequestbtn.html')
+
+

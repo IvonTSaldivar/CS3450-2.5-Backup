@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
-from .tables import MediaTable
+from .tables import SearchTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -143,7 +143,7 @@ def Search(request):
     else:
         media = Media.objects.none()
 
-    table = MediaTable(media)
+    table = SearchTable(media)
     RequestConfig(request).configure(table)
 
     return render(request, 'pages/search.html',

@@ -5,8 +5,11 @@
 	{# if search_term #}
 		<h3>Search for "{{ search_term }}" returned {{ search_results|length }} results</h3><br>
 		{% if search_term %}
-        <!-- this little guy is rendering and displaying the fancy table-->
-      {% render_table table %}
+      <form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
+        {% csrf_token %}
+          <!-- this little guy is rendering and displaying the fancy table-->
+        {% render_table table %}
+      </form>
 
 
       <!--The following is an old table style commented out in case we decide to use it again.-->
