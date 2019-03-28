@@ -2,6 +2,22 @@
 
 {% block content %}
 		<div id="body-wrapper">
+    <div id="sidebar-wrapper">
+      <br>
+      <h4>Sort by:</h4>
+      <a href="/?sort=name">
+					<button class="btn btn-outline-secondary my-2 my-sm-0"
+							type="sumbit">Name</button>
+				</a>
+				<a href="/?sort=media_type">
+					<button class="btn btn-outline-secondary my-2 my-sm-0"
+							type="sumbit">Type</button>
+				</a>
+				<a href="/?sort=owner">
+					<button class="btn btn-outline-secondary my-2 my-sm-0"
+							type="sumbit">Owner</button>
+				</a>
+			</div>
 			<div id="shelf-wrapper">
 				{% for shelf in shelves %}
 					   <div class="shelf">

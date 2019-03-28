@@ -22,8 +22,20 @@ def ShelfView(request):
 
 def HomeView(request):
     shelves = set([])
+    media = Media.objects.none()
 
-    media = Media.objects.all()
+    if 'sort' in request.GET:
+        sort = request.GET['sort']
+        # if sort == "type":
+        #     media = Media.objects.order_by('media_type')
+        #
+        # elif sort == "owner":
+        #     media = Media.objects.order_by('owner')
+    else:
+        sort = 'name'
+        # media = Media.objects.order_by('name')
+
+    media = Media.objects.order_by(sort)
     for medium in media:
         shelves.add(medium.shelf)
 
