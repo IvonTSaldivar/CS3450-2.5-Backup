@@ -26,20 +26,17 @@ def HomeView(request):
 
     if 'sort' in request.GET:
         sort = request.GET['sort']
-        # if sort == "type":
-        #     media = Media.objects.order_by('media_type')
-        #
-        # elif sort == "owner":
-        #     media = Media.objects.order_by('owner')
     else:
         sort = 'name'
-        # media = Media.objects.order_by('name')
 
     media = Media.objects.order_by(sort)
+
     for medium in media:
         shelves.add(medium.shelf)
 
-    #shelves = Shelf.objects.all()
+    if sort == 'owner':
+        shelves=sorted(shelves,key=lambda x: x.owner.username, reverse=False)
+
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/home.html', context,)
 
