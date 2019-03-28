@@ -38,12 +38,6 @@ def HomeView(request):
     if sort == 'owner':
         shelves=sorted(shelves,key=lambda x: x.owner.username, reverse=False)
 
-    # if sort == 'type':
-    #     for m in media:
-    #         t = m
-    #         t.owner = m.media_type
-
-
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/home.html', context,)
 
@@ -101,14 +95,20 @@ def EncodedShelf(request, username, encoded_shelf):
     return render(request, 'pages/shelfViews/expandedshelf.html', context,)
 
 def ViewOnlyShelf(request, username, encoded_shelf):
+    media = set([])
     decodedShelf = urllib.parse.unquote(encoded_shelf)
     decodedUser = urllib.parse.unquote(username)
-    print(decodedUser)
     user = User.objects.get(username=decodedUser)
     shelf = Shelf.objects.get(name=decodedShelf, owner=user)
 
-    media = Media.objects.all()
-    context = {'shelf': shelf, 'media': media, }
+    for medium in Media.objects.all():
+        if medium.shelf == shelf:
+            media.add(medium)
+
+    table = SearchTable(media)
+    RequestConfig(request).configure(table)
+
+    context = {'shelf': shelf, 'table': table,}
     return render(request, 'pages/shelfViews/viewonly.html',context,)
 
 
