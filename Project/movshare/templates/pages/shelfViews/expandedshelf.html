@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<a href="{% url 'library:shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
+  {% load render_table from django_tables2 %}
+  <a href="{% url 'library:shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
 	<br><br>
 	<h3>
 		{{ shelf.name }}
 	</h3>
+  <form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media_{{medium.name}}">
+    {% csrf_token %}
+      <!-- this little guy is rendering and displaying the fancy table-->
+    {% render_table table %}
+  </form>
+
 <table style="width:100%" class="media-table">
 	<tr>
 		<th>Title</th>
@@ -30,11 +37,12 @@
 		{% endif %}
 	{% endfor %}
 </table>
+
 	  <br>
 	  <div class="delete-shelf">
 			<form method="POST" action="{% url 'library:deleteShelf'  %}" id="delete_shelf">
 				{% csrf_token %}
 				<input type="hidden" name="shelf_name" value="{{ shelf.name }}">
-				<a href="#" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
+				<a href="#" class="btn btn-danger" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
 			</form></div>
 {% endblock content %}

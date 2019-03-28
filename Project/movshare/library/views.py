@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
-from .tables import SearchTable
+from .tables import SearchTable, ExpandedShelfTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -19,6 +19,7 @@ def ShelfView(request):
         shelf.save()
     shelves = Shelf.objects.all()
     media = Media.objects.all()
+
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/shelf.html', context,)
 
@@ -88,10 +89,18 @@ def PostShelf(request):
 
 
 def EncodedShelf(request, username, encoded_shelf):
+    media = set([])
     decoded = urllib.parse.unquote(encoded_shelf)
     shelf = Shelf.objects.get(name=decoded, owner=request.user)
-    media = Media.objects.all()
-    context = {'shelf': shelf, 'media': media, }
+
+    for medium in Media.objects.all():
+        if medium.shelf == shelf:
+            media.add(medium)
+
+    table = ExpandedShelfTable(media)
+    RequestConfig(request).configure(table)
+
+    context = {'shelf': shelf, 'media': media, 'table': table,}
     return render(request, 'pages/shelfViews/expandedshelf.html', context,)
 
 def ViewOnlyShelf(request, username, encoded_shelf):
