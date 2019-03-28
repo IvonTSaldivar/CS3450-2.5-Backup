@@ -149,7 +149,6 @@ def Search(request):
     return render(request, 'pages/search.html',
                   {
                       'search_term': search_term,
-                      'search_results': media,
                       'table': table,
                   }
                   )
