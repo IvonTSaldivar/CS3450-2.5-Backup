@@ -2,11 +2,17 @@
 
 {% block content %}
 {% load render_table from django_tables2 %}
-	{# if search_term #}
+
 		<h3>Search for "{{ search_term }}" returned {{ search_results|length }} results</h3><br>
-		{% if search_term %}
-          <!-- this little guy is rendering and displaying the fancy table-->
-        {% render_table table %}
+
+    {% if search_term %}
+      <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
+    <form method="" action="">
+      {% csrf_token %}
+        <!-- this little guy is rendering and displaying the fancy table-->
+      {% render_table table %}
+    </form>
+   {% endif %}
 
 
       <!--The following is an old table style commented out in case we decide to use it again.-->
@@ -36,7 +42,6 @@
 {#				{% endfor %}#}
 {#			</table>#}
 
-		{% endif %}
 	{% comment %}
 	{% else %}
 		<h3>Search for "" was inconclusive</h3>
