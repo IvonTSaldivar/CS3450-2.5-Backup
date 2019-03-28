@@ -22,7 +22,6 @@ def ShelfView(request):
 
 def HomeView(request):
     shelves = set([])
-    media = Media.objects.none()
 
     if 'sort' in request.GET:
         sort = request.GET['sort']
@@ -36,6 +35,12 @@ def HomeView(request):
 
     if sort == 'owner':
         shelves=sorted(shelves,key=lambda x: x.owner.username, reverse=False)
+
+    # if sort == 'type':
+    #     for m in media:
+    #         t = m
+    #         t.owner = m.media_type
+
 
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/home.html', context,)
