@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
+from .tables import MediaTable
+from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
@@ -134,15 +136,20 @@ def DeleteShelf(request):
 
 def Search(request):
     search_term = ''
-    if 'search' in request.GET:
+    if 'search' in request.GET and request.GET['search'] is not '':
         search_term = request.GET['search']
         media = Media.objects.filter(Q(name__icontains=search_term) | Q(media_type__icontains=search_term) | Q(
             description__icontains=search_term))
     else:
         media = Media.objects.none()
+
+    table = MediaTable(media)
+    RequestConfig(request).configure(table)
+
     return render(request, 'pages/search.html',
                   {
                       'search_term': search_term,
-                      'search_results': media
+                      'search_results': media,
+                      'table': table,
                   }
                   )

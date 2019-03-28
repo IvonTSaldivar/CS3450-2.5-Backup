@@ -1,33 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% load render_table from django_tables2 %}
 	{# if search_term #}
 		<h3>Search for "{{ search_term }}" returned {{ search_results|length }} results</h3><br>
 		{% if search_results %}
-			<table style="width:100%" class="media-table">
-				<tr>
-					<th>Title</th>
-					<th>Media Type</th>
-					<th>Description</th>
-					<th>Owner</th>
-				</tr>
-				{% for media in search_results %}
-					<tr>
-						<td>{{ media.name }}</td>
-						<td>{{ media.media_type}}</td>
-						<td>{{ media.description }}</td>
-						<td>{{ media.owner.username }}</td>
-						<td class='url'>
-							<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
-								{% csrf_token %}
-								<input type="hidden" name="media_name" value="{{ media.name|urlencode }}">
-								<input type="hidden" name="media_shelf" value="{{ media.shelf.name|urlencode }}">
-								<input type="hidden" name="media_owner" value="{{ media.owner.username|urlencode }}">
-								<a href="#">Request Loan</a>
-							</form></td>
-					</tr>
-				{% endfor %}
-			</table>
+        <!-- this little guy is rendering and displaying the fancy table-->
+      {% render_table table %}
+
+
+      <!--The following is an old table style commented out in case we decide to use it again.-->
+
+{#			<table style="width:100%" class="media-table">#}
+{#				<tr>#}
+{#          <th><a href={{ request.get_full_path }}"&sort=name">Title</a></th>#}
+{#          <th><a method="GET" action="{% url 'library:search' %}">Media Type</a></th>#}
+{#					<th>Description</th>#}
+{#          <th><a href={{ request.path }}"?search=%s&sort=owner" % search)term>Owner</a></th>#}
+{#				</tr>#}
+{#				{% for media in search_results %}#}
+{#					<tr>#}
+{#						<td>{{ media.name }}</td>#}
+{#						<td>{{ media.media_type}}</td>#}
+{#						<td>{{ media.description }}</td>#}
+{#						<td>{{ media.owner.username }}</td>#}
+{#						<td class='url'>#}
+{#							<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">#}
+{#								{% csrf_token %}#}
+{#								<input type="hidden" name="media_name" value="{{ media.name|urlencode }}">#}
+{#								<input type="hidden" name="media_shelf" value="{{ media.shelf.name|urlencode }}">#}
+{#								<input type="hidden" name="media_owner" value="{{ media.owner.username|urlencode }}">#}
+{#								<a href="#">Request Loan</a>#}
+{#							</form></td>#}
+{#					</tr>#}
+{#				{% endfor %}#}
+{#			</table>#}
+
 		{% endif %}
 	{% comment %}
 	{% else %}
