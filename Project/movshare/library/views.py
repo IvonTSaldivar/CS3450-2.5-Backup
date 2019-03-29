@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
+from .tables import SearchTable, ExpandedShelfTable
+from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
@@ -17,17 +19,26 @@ def ShelfView(request):
         shelf.save()
     shelves = Shelf.objects.all()
     media = Media.objects.all()
+
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/shelf.html', context,)
 
 def HomeView(request):
     shelves = set([])
 
-    media = Media.objects.all()
+    if 'sort' in request.GET:
+        sort = request.GET['sort']
+    else:
+        sort = 'name'
+
+    media = Media.objects.order_by(sort)
+
     for medium in media:
         shelves.add(medium.shelf)
 
-    #shelves = Shelf.objects.all()
+    if sort == 'owner':
+        shelves=sorted(shelves,key=lambda x: x.owner.username, reverse=False)
+
     context = {'shelves': shelves,'media': media,}
     return render(request, 'pages/home.html', context,)
 
@@ -78,21 +89,35 @@ def PostShelf(request):
 
 
 def EncodedShelf(request, username, encoded_shelf):
+    media = set([])
     decoded = urllib.parse.unquote(encoded_shelf)
     shelf = Shelf.objects.get(name=decoded, owner=request.user)
-    media = Media.objects.all()
-    context = {'shelf': shelf, 'media': media, }
+
+    for medium in Media.objects.all():
+        if medium.shelf == shelf:
+            media.add(medium)
+
+    table = ExpandedShelfTable(media)
+    RequestConfig(request).configure(table)
+
+    context = {'shelf': shelf, 'media': media, 'table': table,}
     return render(request, 'pages/shelfViews/expandedshelf.html', context,)
 
 def ViewOnlyShelf(request, username, encoded_shelf):
+    media = set([])
     decodedShelf = urllib.parse.unquote(encoded_shelf)
     decodedUser = urllib.parse.unquote(username)
-    print(decodedUser)
     user = User.objects.get(username=decodedUser)
     shelf = Shelf.objects.get(name=decodedShelf, owner=user)
 
-    media = Media.objects.all()
-    context = {'shelf': shelf, 'media': media, }
+    for medium in Media.objects.all():
+        if medium.shelf == shelf:
+            media.add(medium)
+
+    table = SearchTable(media)
+    RequestConfig(request).configure(table)
+
+    context = {'shelf': shelf, 'table': table,}
     return render(request, 'pages/shelfViews/viewonly.html',context,)
 
 
@@ -120,15 +145,19 @@ def DeleteShelf(request):
 
 def Search(request):
     search_term = ''
-    if 'search' in request.GET:
+    if 'search' in request.GET and request.GET['search'] is not '':
         search_term = request.GET['search']
         media = Media.objects.filter(Q(name__icontains=search_term) | Q(media_type__icontains=search_term) | Q(
             description__icontains=search_term))
     else:
         media = Media.objects.none()
+
+    table = SearchTable(media)
+    RequestConfig(request).configure(table)
+
     return render(request, 'pages/search.html',
                   {
                       'search_term': search_term,
-                      'search_results': media
+                      'table': table,
                   }
                   )
