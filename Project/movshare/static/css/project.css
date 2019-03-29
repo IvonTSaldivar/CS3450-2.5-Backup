@@ -13,79 +13,107 @@
 }
 
 #body-wrapper {
-	display: flex;
-	flex-direction: row;
-	flex-basis: 100%;
-	justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    flex-basis: 100%;
+    justify-content: space-between;
 }
 
 #sidebar-wrapper {
-	display: flex;
-	max-width: 10%;
-	flex-direction: column;
+    margin:10px;
+}
+
+.sidebar{
+    display: flex;
+    position: fixed;
+    min-width: 15%;
+    max-width: 15%;
+    background-color: rgba(169,169,169, .2);
+    margin: 40px;
+
+}
+
+.sidebar div .sidebar-content {
+    padding: 6px 8px 6px 16px;
+    display: block;
+}
+
+.hidden {
+    block: hidden;
+}
+
+.container {
+    display: flex;
+    align-self: center;
+}
+
+.content {
+    display:flex;
+    flex-direction: row;
 }
 
 button.addX{
-	display:flex;
-	margin: 5px;
+    display:flex;
+    margin: 5px;
 }
 
 #shelf-wrapper {
-	display: flex;
-	flex-direction: column;
-	overflow: hidden;
-	max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-width: 80%;
+
 }
 
 
 
 .shelf {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .shelf-title {
-	display: flex;
-	flex-direction: row;
-	min-width: min-content;
-	justify-content: center;
+    display: flex;
+    flex-direction: row;
+    min-width: min-content;
+    justify-content: center;
 }
 
 .shelf-content {
-	display: flex;
-	flex-direction: row;
-	overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
 }
 
 .underline {
-	border-bottom: 1px dotted black;
-	min-width: 90px;
+    border-bottom: 1px dotted black;
+    min-width: 90px;
 }
 
 .delete-shelf {
-	display: flex;
-	float:right;
+    display: flex;
+    float:right;
 }
 
 .media-content {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	line-height: 1.2;
-	padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.2;
+    padding-bottom: 5px;
 }
 .media {
-	display: flex;
-	flex-direction: column;
-	border: 2px solid black;
-	padding: 5px;
-	margin: 4px;
-	flex: 0 0 100px;
-	align-items: center;
-	text-align: center;
-	height: 150px;
-	max-width: 100px;
-	
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    padding: 5px;
+    margin: 4px;
+    flex: 0 0 100px;
+    align-items: center;
+    text-align: center;
+    height: 150px;
+    max-width: 100px;
+    
 
 }
 
@@ -93,17 +121,19 @@ button.addX{
 
 }
 .media-table td, .media-table th {
-	padding-left: 15px;
-	min-width: 125px;
+    padding-left: 15px;
+    min-width: 125px;
 }
 
 
 .url {
-	text-align: right;
-	padding-right: 10px;
+    text-align: right;
+    padding-right: 10px;
 }
 
 .media-table tr:nth-child(even){
 
-	background-color: rgba(169,169,169, .2);
+    background-color: rgba(169,169,169, .2);
 }
+
+

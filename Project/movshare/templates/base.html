@@ -94,20 +94,25 @@
       </nav>
 
     </div>
+    <div class="content">
+        <div class="sidebar">
+          {% block sidebar %}
+          {% endblock sidebar %}
+        </div>
+        <div class="container">
 
-    <div class="container">
+          {% if messages %}
+              {% for message in messages %}
+                  <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
 
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+          {% block content %}
+            <p>Use this document as a way to quick start any new project.</p>
+          {% endblock content %}
 
-      {% block content %}
-        <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-
-    </div> <!-- /container -->
+        </div> <!-- /container -->
+    </div> <!-- /content -->
 
     {% block modal %}{% endblock modal %}
 
