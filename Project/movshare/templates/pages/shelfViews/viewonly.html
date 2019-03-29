@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load render_table from django_tables2 %}
+  <a href="{% url 'home' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
+	<br><br>
+	<h3>
+		{{ shelf.owner }} {{ shelf.name }}
+	</h3>
+
+    <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
+  <form method="" action="">
+    {% csrf_token %}
+      <!-- this little guy is rendering and displaying the fancy table-->
+    {% render_table table %}
+  </form>
+
+
+            <!--old stuff no longer needed. Keeping for posterity-->
+{#  <table style="width:100%" class="media-table">#}
+{#	<tr>#}
+{#		<th>Title</th>#}
+{#		<th>Media Type</th>#}
+{#		<th>Description</th>#}
+{#	</tr>#}
+{#	{% for medium in media %}#}
+{#		{% if medium.shelf == shelf %}#}
+{#			<tr>#}
+{#				<td>{{ medium.name }}</td>#}
+{#				<td>{{ medium.media_type}}</td>#}
+{#				<td>{{ medium.description }}</td>#}
+{#				<td class='url'>#}
+{#						<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">#}
+{#								{% csrf_token %}#}
+{#								<input type="hidden" name="media_name" value="{{ media.name|urlencode }}">#}
+{#								<input type="hidden" name="media_shelf" value="{{ media.shelf.name|urlencode }}">#}
+{#								<input type="hidden" name="media_owner" value="{{ media.owner.username|urlencode }}">#}
+{#								<a href="#">Request Loan</a>#}
+{#							</form>#}
+{#			</tr>#}
+{#		{% endif %}#}
+{#	{% endfor %}#}
+{#</table>#}
+	  <br>
+{% endblock content %}
