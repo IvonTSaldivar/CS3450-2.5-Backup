@@ -4,6 +4,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+*.json
+*.config
+*.sqlite
+*0248.py
+*.gitignore*
+
+
 # C extensions
 *.so
 
