@@ -7,7 +7,7 @@ class RequestTable(tables.Table):
         attrs = {'class': 'table table-sm'}
         fields = ['name', 'media_type', 'description', 'delete']
         template_name = 'django_tables2/bootstrap.html'
-    approve = TemplateColumn(temlpate_name = 'pages/tables/approvebtn.html')
+    approve = TemplateColumn(template_name = 'pages/tables/approvebtn.html')
     #add reject button in future
 
 

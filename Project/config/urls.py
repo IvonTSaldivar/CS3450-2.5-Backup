@@ -33,9 +33,13 @@ urlpatterns = [
         "library/",
         include("movshare.library.urls", namespace="library"),
     ),
-
-
-    path("accounts/", include("allauth.urls")),
+    path(
+        "accounts/",
+        include("allauth.urls")),
+    path(
+        "loans/",
+        include("movshare.loans.urls", namespace="loans"),
+    )
     # Your stuff: custom urls includes go here
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
