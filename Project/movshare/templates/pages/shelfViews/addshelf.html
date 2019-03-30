@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<a href="{% url 'library:shelf' %}"><- Go Back</a>
-	<br><br>
-	{{ user.username }}
-	<form method="POST" action="{% url 'library:newShelf' %}">
-		{% csrf_token %}
-		<div>
-			<label for="name">Shelf Name:</label>
-			<input type="text" id="name" name="name">
-		</div>
-		<div>
-			<button type="submit">Submit</button>
-		</div>
-	</form>
+    <a href="{% url 'library:shelf' %}"><- Go Back</a>
+    <br><br>
+    {{ user.username }}
+    <form method="POST" action="{% url 'library:newShelf' %}" id="addShelfForm">
+        {% csrf_token %}
+        <div>
+            <label for="name">Shelf Name:</label>
+            <input type="text" id="name" name="name">
+        </div>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
 
 {% endblock content %}

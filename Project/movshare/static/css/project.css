@@ -23,6 +23,13 @@
     margin:10px;
 }
 
+#addMediaBlock{
+    display: none;
+}
+
+#addShelfBlock{
+    display:none;
+}
 .sidebar{
     display: flex;
     position: fixed;
@@ -30,6 +37,7 @@
     max-width: 15%;
     background-color: rgba(169,169,169, .2);
     margin: 40px;
+    border-radius:15px;
 
 }
 

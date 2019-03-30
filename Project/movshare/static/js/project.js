@@ -1,25 +1,26 @@
 /* Project specific Javascript goes here. */
 
-function toggleHideContent(var id){
+function toggleHideContent(id){
     var content = document.getElementById(id);
-    if(content)
-        if(content.style.display == "hidden"){
+    if(content){
+        if(content.style.display == "none"){
             content.style.display = "block";
         } else if (content.style.display == "block"){
-            content.style.display = "hidden";
+            content.style.display = "none";
         }
     }
 }
 
-function toggleButton(var id){
+function toggleButton(id){
     toggleHideContent(id);
     toggleOtherButton(id);
 }
-function toggleOtherButton(var id){
+
+function toggleOtherButton(id){
     var otherID;
-    if (id == "addMediaButton"){
-        otherID = "addShelfButton";
-    } else otherID = "addMediaButton";
+    if (id == "addMediaBlock"){
+        otherID = "addShelfBlock";
+    } else otherID = "addMediaBlock";
     var button = document.getElementById(otherID);
-    button.style.display = "hidden";
+    button.style.display = "none";
 }
