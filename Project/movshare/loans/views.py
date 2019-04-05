@@ -27,11 +27,12 @@ def requestsView(request, username):
 
 # api for adding request to database
 def requestMedia(request):
-    if request.method == 'post':
+    print(str(request.method))
+    if request.method == 'POST':
         requester = request.user
         print(str(requester))
         print(request.POST.get('media_name'))
         print(request.POST.get('media_owner'))
         #media = Media.abjects.get(name= request.POST.get('media_name'), owner= request.POST('media_owner')
-
+    return redirect('library:shelf')
 # api for approving request.

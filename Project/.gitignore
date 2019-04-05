@@ -9,6 +9,7 @@ __pycache__/
 *.sqlite
 *0248.py
 *.gitignore*
+*.onetoc2
 
 
 # C extensions
