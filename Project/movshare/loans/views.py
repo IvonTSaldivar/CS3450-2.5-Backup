@@ -32,9 +32,11 @@ def requestMedia(request):
     if request.method == 'POST' and str(request.user) != 'AnonymousUser':
         requester = request.user.username
         mediaName = urllib.parse.unquote(request.POST.get('media_name'))
-        #mediaOwner = User.objects.get(name = request.POST.get('media_owner'))
-        mediaOwner = User.objects.all()
-        for m in mediaOwner:
+
+        mediaOwner = User.objects.get(username = request.POST.get('media_owner'))
+
+        mediaOwnerAll = User.objects.all()
+        for m in mediaOwnerAll:
             print("name:")
             print(m.username)
 
@@ -43,12 +45,13 @@ def requestMedia(request):
         print(str(requester))
         print(request.POST.get('media_owner'))
 
-        #daRequest = MediaRequest(requester = request.user,
-                                 #media = Media.objects.get(name = mediaName, owner = request.POST.get(owner = mediaOwner)))
+        count = MediaRequest.objects.filter(media = Media.objects.get(name = mediaName, owner = mediaOwner)).count()
 
-
-
-
-        #media = Media.abjects.get(name= request.POST.get('media_name'), owner= request.POST('media_owner')
+        if count == 0:
+            r = MediaRequest(requester = request.user,
+                                 media = Media.objects.get(name = mediaName, owner = mediaOwner),
+                                 message = "")
+            r.save()
+            print("saved")
     return redirect('library:shelf')
 # api for approving request.
