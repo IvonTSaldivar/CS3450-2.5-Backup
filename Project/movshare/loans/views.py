@@ -12,19 +12,23 @@ import urllib.parse
 # Create your views here.
 
 # view for requests screen
-def requestsView(request, username):
+def requestsView(request):
     media = set([])
     theRequests = MediaRequest.objects.filter(requester= request.user)
 
-    for medium in Media.objects.all():
-        if medium.shelf == shelf:
-            media.add(medium)
+    for r in theRequests:
+        print(r.media.owner)
+        print(r.media.name)
 
-    table = ExpandedShelfTable(media)
+
+    table = RequestTable(media)
     RequestConfig(request).configure(table)
-
-    context = {'shelf': shelf, 'media': media, 'table': table,}
-    return render(request, 'pages/requests/requests.html', context,)
+    #context = {'shelf': shelf, 'media': media, 'table': table,}
+    #return render(request, 'pages/requests/requests.html', context,)
+    #return redirect('library:shelf')
+    #context = {'shelf': shelf, 'media': media, 'table': table,}
+    return redirect('library:shelf')
+    #return render(request, 'pages/requests/requests.html', context,)
 
 # api for adding request to database
 def requestMedia(request):
@@ -48,4 +52,13 @@ def requestMedia(request):
                 r.save()
                 print("saved")
     return redirect('library:shelf')
+
 # api for approving request.
+def approveMedia(request):
+
+
+    return redirect('library:shelf')
+
+# api for rejecting request.
+
+# api for approving request

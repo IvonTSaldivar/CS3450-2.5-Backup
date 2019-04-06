@@ -8,3 +8,4 @@ class MediaRequest(models.Model):
     requester = models.ForeignKey(User, on_delete=models.CASCADE) # need to migrate stuff
     media = models.OneToOneField(Media, on_delete=models.CASCADE)
     message = models.CharField(max_length=255)
+    #consider adding boolean field for approvals
