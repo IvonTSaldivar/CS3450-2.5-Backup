@@ -5,6 +5,6 @@ from movshare.library.models import Media
 # Create your models here.
 
 class MediaRequest(models.Model):
-    requester = models.OneToOneField(User, on_delete=models.CASCADE)
+    requester = models.ForeignKey(User, on_delete=models.CASCADE) # need to migrate stuff
     media = models.OneToOneField(Media, on_delete=models.CASCADE)
     message = models.CharField(max_length=255)

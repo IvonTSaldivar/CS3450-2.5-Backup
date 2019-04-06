@@ -31,27 +31,21 @@ def requestMedia(request):
     print(str(request.method))
     if request.method == 'POST' and str(request.user) != 'AnonymousUser':
         requester = request.user.username
-        mediaName = urllib.parse.unquote(request.POST.get('media_name'))
-
         mediaOwner = User.objects.get(username = request.POST.get('media_owner'))
+        if requester != request.POST.get('media_owner'):
+            mediaName = urllib.parse.unquote(request.POST.get('media_name'))
 
-        mediaOwnerAll = User.objects.all()
-        for m in mediaOwnerAll:
-            print("name:")
-            print(m.username)
+            print(urllib.parse.unquote(request.POST.get('media_name')))
+            print(str(requester))
+            print(request.POST.get('media_owner'))
 
+            count = MediaRequest.objects.filter(media = Media.objects.get(name = mediaName, owner = mediaOwner)).count()
 
-        print(urllib.parse.unquote(request.POST.get('media_name')))
-        print(str(requester))
-        print(request.POST.get('media_owner'))
-
-        count = MediaRequest.objects.filter(media = Media.objects.get(name = mediaName, owner = mediaOwner)).count()
-
-        if count == 0:
-            r = MediaRequest(requester = request.user,
+            if count == 0:
+                r = MediaRequest(requester = request.user,
                                  media = Media.objects.get(name = mediaName, owner = mediaOwner),
                                  message = "")
-            r.save()
-            print("saved")
+                r.save()
+                print("saved")
     return redirect('library:shelf')
 # api for approving request.
