@@ -14,20 +14,23 @@ import urllib.parse
 # view for requests screen
 def requestsView(request):
     media = set([])
-    theRequests = MediaRequest.objects.filter(requester= request.user)
+    print(request.user)
+    if(str(request.user) != 'AnonymousUser'):
+        theRequests = MediaRequest.objects.filter(requester= request.user)
 
-    for r in theRequests:
-        print(r.media.owner)
-        print(r.media.name)
+        for r in theRequests:
+            print(r.media.owner)
+            print(r.media.name)
 
 
-    table = RequestTable(media)
-    RequestConfig(request).configure(table)
-    #context = {'shelf': shelf, 'media': media, 'table': table,}
-    #return render(request, 'pages/requests/requests.html', context,)
-    #return redirect('library:shelf')
-    #context = {'shelf': shelf, 'media': media, 'table': table,}
-    return redirect('library:shelf')
+        table = RequestTable(media)
+        RequestConfig(request).configure(table)
+        #context = {'shelf': shelf, 'media': media, 'table': table,}
+        #return render(request, 'pages/requests/requests.html', context,)
+        #return redirect('library:shelf')
+        #context = {'shelf': shelf, 'media': media, 'table': table,}
+        return redirect('library:shelf')
+    return redirect('home')
     #return render(request, 'pages/requests/requests.html', context,)
 
 # api for adding request to database
