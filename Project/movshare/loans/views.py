@@ -13,6 +13,9 @@ import urllib.parse
 
 # view for requests screen
 def requestsView(request):
+    #redirect if not logged in not working not sure why. May need to register loans as an app?
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/?next=loans/requests')
     media = set([])
     print(request.user)
     if(str(request.user) != 'AnonymousUser'):
@@ -36,6 +39,8 @@ def requestsView(request):
 # api for adding request to database
 def requestMedia(request):
     print(str(request.method))
+    owner = request.POST.get('media_owner')
+    shelf = request.POST.get('shelf_name')
     if request.method == 'POST' and str(request.user) != 'AnonymousUser':
         requester = request.user.username
         mediaOwner = User.objects.get(username = request.POST.get('media_owner'))
@@ -54,7 +59,9 @@ def requestMedia(request):
                                  message = "")
                 r.save()
                 print("saved")
-    return redirect('library:shelf')
+    # needs to redirect to current shelf view page.
+    destination = '/library/shelf/view/%s/%s' %(owner, shelf)
+    return redirect(destination)
 
 # api for approving request.
 def approveMedia(request):

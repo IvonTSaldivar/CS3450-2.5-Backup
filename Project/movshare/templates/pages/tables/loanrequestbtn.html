@@ -2,6 +2,7 @@
         or record. anything else to get that value for the element that has been clicked on. -->
 <form method="POST" action="{% url 'loans:requestMedia' %}" id="request_media_{{ record.name }}">
   {% csrf_token %}
+  <input type="hidden" name="shelf_name" value="{{ record.shelf.name|urlencode }}">
   <input type="hidden" name="media_name" value="{{ record.name|urlencode }}">
   <input type="hidden" name="media_owner" value="{{ record.owner.username|urlencode }}">
   <a href="#" class="btn btn-info btn-sm" onclick="document.getElementById('request_media_{{ record.name }}').submit();">Request</a>
