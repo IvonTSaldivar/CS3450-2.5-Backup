@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from movshare.library.models import Media
 from movshare.loans.models import MediaRequest
 from movshare.users.models import User
@@ -32,7 +33,7 @@ def requestsView(request):
         #return render(request, 'pages/requests/requests.html', context,)
         #return redirect('library:shelf')
         #context = {'shelf': shelf, 'media': media, 'table': table,}
-        return redirect('library:shelf')
+        return render(request, 'pages/requests/requests.html')
     return redirect('home')
     #return render(request, 'pages/requests/requests.html', context,)
 
@@ -59,7 +60,6 @@ def requestMedia(request):
                                  message = "")
                 r.save()
                 print("saved")
-    # needs to redirect to current shelf view page.
     destination = '/library/shelf/view/%s/%s' %(owner, shelf)
     return redirect(destination)
 

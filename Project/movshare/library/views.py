@@ -147,6 +147,7 @@ def Search(request):
     search_term = ''
     if 'search' in request.GET and request.GET['search'] is not '':
         search_term = request.GET['search']
+        # some how remove requested items from displaying
         media = Media.objects.filter(Q(name__icontains=search_term) | Q(media_type__icontains=search_term) | Q(
             description__icontains=search_term))
     else:
