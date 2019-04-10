@@ -23,6 +23,7 @@ def requestsView(request):
         theRequests = MediaRequest.objects.filter(requester= request.user)
 
         for r in theRequests:
+            media.add(r)
             print(r.media.owner)
             print(r.media.name)
 
@@ -30,7 +31,7 @@ def requestsView(request):
         table = RequestTable(media)
         RequestConfig(request).configure(table)
         #context = {'shelf': shelf, 'media': media, 'table': table,}
-        context = {'table': table,}
+        context = {'table': table}
         return render(request, 'pages/requests/requests.html', context)
     return redirect('home')
     #return render(request, 'pages/requests/requests.html', context,)

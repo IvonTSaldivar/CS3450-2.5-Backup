@@ -98,6 +98,8 @@ def EncodedShelf(request, username, encoded_shelf):
             media.add(medium)
 
     table = ExpandedShelfTable(media)
+
+
     RequestConfig(request).configure(table)
 
     context = {'shelf': shelf, 'media': media, 'table': table,}
