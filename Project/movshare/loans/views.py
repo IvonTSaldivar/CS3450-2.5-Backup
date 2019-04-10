@@ -30,10 +30,8 @@ def requestsView(request):
         table = RequestTable(media)
         RequestConfig(request).configure(table)
         #context = {'shelf': shelf, 'media': media, 'table': table,}
-        #return render(request, 'pages/requests/requests.html', context,)
-        #return redirect('library:shelf')
-        #context = {'shelf': shelf, 'media': media, 'table': table,}
-        return render(request, 'pages/requests/requests.html')
+        context = {'table': table,}
+        return render(request, 'pages/requests/requests.html', context)
     return redirect('home')
     #return render(request, 'pages/requests/requests.html', context,)
 
