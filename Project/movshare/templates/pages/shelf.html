@@ -1,44 +1,95 @@
 {% extends "base.html" %}
 
+{% block sidebar %}
+<div id="sidebar-wrapper">
+    {# addShelf button #}
+    <div class="sidebar-content">
+        <button class="btn btn-outline-primary my-2 my-sm-0" 
+                onclick='toggleButton("addMediaBlock");'>Add Media</button>
+        <div id="addMediaBlock" style="display:none;">
+            <form method="POST" action="{% url 'library:newMedia' %}" id="addMediaForm">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Media Name: </label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div>
+                    <label for="type">Media Type: </label>
+                    <select name="type" id="type">
+                        <option value="movie">Movie</option>
+                        <option value="game">Game</option>
+                        <option value="music">Music</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="description">Description:</label>
+                    <textarea type="text" id="description" name="description"></textarea>
+                </div>
+                <div>
+                    <label for="shelf">Shelf Name:</label>
+                    <select id="shelf" name="shelf">
+                        {% for shelf in shelves %}
+                        {% if shelf.owner == user %}
+                        <option value="{{ shelf.name }}"> {{ shelf.name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <button onClick="document.getElementById('addMediaForm').submit()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {# end addMedia button #}
+    {# addShelf button #}
+    <div class="sidebar-content">
+        <button class="btn btn-outline-primary my-2 my-sm-0"
+                type="sumbit" onclick="toggleButton('addShelfBlock')">Add Shelf</button>
+        <div id="addShelfBlock" style="display:none;">
+            <form method="POST" action="{% url 'library:newShelf' %}" id="addShelfForm">
+                {% csrf_token %}
+                <div>
+                    <label for="name">Shelf Name:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                <div>
+                    <button onclick="document.getElementById('addShelfForm').submit()">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock sidebar %}
 {% block content %}
-	{% if user.is_authenticated %}
-		<div id="body-wrapper">
-			<div id="sidebar-wrapper">
-				<br>
-				<form action="{% url 'library:addMedia' %}">
-					<button class="btn btn-outline-primary my-2 my-sm-0" 
-							type="sumbit">Add Media</button>
-				</form>
-				<form action="{% url 'library:addShelf' %}">
-					<button class="btn btn-outline-primary my-2 my-sm-0"
-							type="sumbit">Add Shelf</button>
-				</form>
-			</div>
-			<div id="shelf-wrapper">
-				{% for shelf in shelves %}
-					{% if shelf.owner == user %}
-					   <div class="shelf">
-							<div class="shelf-title">
-								<a href="{% url 'library:encodedshelf' user.username|urlencode shelf.name|urlencode %}"><h3>
-								  {{ shelf.name }}
-								</h3></a>
-							</div>
-							<div class="shelf-content">
-									{% for medium in media %}
-										{% if medium.shelf == shelf %}
-											<div class="media">
-											   <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
-											   <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
-											   <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
-											</div>
-										{% endif %}
-									{% endfor %}
-							</div>
-						</div>
-					{% endif %}
-				{% endfor %}
-			</div>
-			<br>
-		</div>
-	{% endif %}
+{% if user.is_authenticated %}
+<div id="body-wrapper">
+    <div id="shelf-wrapper">
+        {% for shelf in shelves %}
+        {% if shelf.owner == user %}
+        <div class="shelf">
+            <div class="shelf-title">
+                <a href="{% url 'library:encodedshelf' user.username|urlencode shelf.name|urlencode %}"><h3>
+                        {{ shelf.name }}
+                    </h3></a>
+            </div>
+            <div class="shelf-content">
+                {% for medium in media %}
+                {% if medium.shelf == shelf %}
+                <div class="media">
+                    <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
+                    <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
+                    <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    <br>
+</div>
+{% endif %}
 {% endblock content %}

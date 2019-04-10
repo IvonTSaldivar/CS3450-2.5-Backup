@@ -1,9 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
-	<a href="{% url 'library:shelf' %}"><- Go Back</a>
-	<br><br>
-	<form method="POST" action="{% url 'library:newMedia' %}">
+	<form method="POST" action="{% url 'library:newMedia' %}" id="addMediaForm">
 		{% csrf_token %}
 		<div>
 			<label for="name">Media Name: </label>
@@ -37,4 +32,3 @@
 			<button type="submit">Submit</button>
 		</div>
 	</form>
-{% endblock content %}
