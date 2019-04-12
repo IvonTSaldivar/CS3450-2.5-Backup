@@ -25,5 +25,5 @@ class LibraryModelsTest(TestCase):
         self.assertEqual(self.media.description, "a movie")
         self.assertEqual(self.media.owner, self.user)
         self.assertEqual(self.media.borrower, self.borrower)
-        self.assertEqual(self.media.isBorrowed, self.True)
+        self.assertEqual(self.media.isBorrowed, True)
         self.assertEqual(self.media.shelf, self.shelf)
