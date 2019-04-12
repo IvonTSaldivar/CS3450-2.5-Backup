@@ -16,16 +16,18 @@ import urllib.parse
 def requestsView(request):
     #redirect if not logged in not working not sure why. May need to register loans as an app?
     if not request.user.is_authenticated:
-        return redirect('/accounts/login/?next=loans/requests')
+        return redirect('/accounts/login/?next=/loans/requests')
     media = set([])
     print(request.user)
     if(str(request.user) != 'AnonymousUser'):
-        theRequests = MediaRequest.objects.filter(requester= request.user)
+        
+        theRequests = MediaRequest.objects.all()
 
         for r in theRequests:
-            media.add(r)
-            print(r.media.owner)
-            print(r.media.name)
+            if(r.media.owner == request.user):
+                media.add(r)
+                print(r.media.owner)
+                print(r.media.name)
 
 
         table = RequestTable(media)
