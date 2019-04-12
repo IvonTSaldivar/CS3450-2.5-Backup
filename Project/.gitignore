@@ -4,6 +4,13 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#*.json
+#*.config
+*.sqlite
+*.vs
+*.onetoc2
+
+
 # C extensions
 *.so
 
