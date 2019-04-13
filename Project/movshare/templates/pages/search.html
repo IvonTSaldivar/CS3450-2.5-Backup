@@ -2,7 +2,7 @@
 
 {% block content %}
 {% load render_table from django_tables2 %}
-
+<div class="main-content">
 		<h3>Search for "{{ search_term }}" returned {{ search_results|length }} results</h3><br>
 
     {% if search_term %}
@@ -13,6 +13,7 @@
       {% render_table table %}
     </form>
    {% endif %}
+  </div>
 
 
       <!--The following is an old table style commented out in case we decide to use it again.-->

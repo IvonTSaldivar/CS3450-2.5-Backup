@@ -2,21 +2,26 @@
 
 {% block content %}
   {% load render_table from django_tables2 %}
-  <a href="{% url '
-     :shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
-	<br><br>
-	<h3>
-		{{ shelf.name }}
-	</h3>
+<div id="sidebar">
+  <a href="{% url 'library:shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
+</div>
+<p id="main-content">
+  <div id="shelf-wrapper">
+	  <h3>
+		  {{ shelf.name }}
+	  </h3>
       <!-- this little guy is rendering and displaying the fancy table-->
     {% render_table table %}
- 
-  
 	  <br>
+    {% if shelf.name != 'Default' %}
 	  <div class="delete-shelf">
 			<form method="POST" action="{% url 'library:deleteShelf' %}" id="delete_shelf">
 				{% csrf_token %}
 				<input type="hidden" name="shelf_name" value="{{ shelf.name }}">
 				<a href="#" class="btn btn-danger" onclick="document.getElementById('delete_shelf').submit();">delete shelf</a>
-			</form></div>
+			</form>
+    </div>
+    {% endif %}
+  </div>
+</p>
 {% endblock content %}
