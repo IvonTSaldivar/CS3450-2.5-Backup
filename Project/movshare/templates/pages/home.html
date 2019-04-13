@@ -3,8 +3,28 @@
 {% block content %}
 <div id="sidebar">
     <div>Hello</div>
-    
 
+    <div id="sidebar-wrapper">
+      <h4 class="sidebar-content">Sort by:</h4>
+      <a href="/?sort=name" class="sidebar-content">
+        <button class="btn btn-outline-secondary my-2 my-sm-0"
+                type="sumbit">
+          Name
+        </button>
+      </a>
+      <a href="/?sort=media_type" class="sidebar-content">
+        <button class="btn btn-outline-secondary my-2 my-sm-0"
+                type="sumbit">
+          Type
+        </button>
+      </a>
+      <a href="/?sort=owner" class="sidebar-content">
+        <button class="btn btn-outline-secondary my-2 my-sm-0"
+                type="sumbit">
+          Owner
+        </button>
+      </a>
+    </div>
 </div>
 <div id="main-content">
     <div>World!</div>

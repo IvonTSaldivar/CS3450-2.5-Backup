@@ -13,8 +13,12 @@
     flex-direction: row;
 }
 
-#sidebar{
-
+#sidebar {
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    border-radius: 15px;
+    background-color: rgba(169,169,169, .2);
 }
 
 #main-content {
@@ -44,6 +48,8 @@
 }
 
 #sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
     margin:10px;
 }
 
