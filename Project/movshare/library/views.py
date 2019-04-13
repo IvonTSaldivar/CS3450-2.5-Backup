@@ -34,7 +34,8 @@ def HomeView(request):
     media = Media.objects.order_by(sort)
 
     for medium in media:
-        shelves.add(medium.shelf)
+        if(medium.owner != request.user):
+            shelves.add(medium.shelf)
 
     if sort == 'owner':
         shelves=sorted(shelves,key=lambda x: x.owner.username, reverse=False)
