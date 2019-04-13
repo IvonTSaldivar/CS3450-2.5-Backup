@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
-{% block sidebar %}
-<div id="sidebar-wrapper">
+{% block content %}
+<div id="sidebar">
     {# addShelf button #}
     <div class="sidebar-content">
         <button class="btn btn-outline-primary my-2 my-sm-0" 
@@ -61,10 +61,8 @@
         </div>
     </div>
 </div>
-{% endblock sidebar %}
-{% block content %}
 {% if user.is_authenticated %}
-<div id="body-wrapper">
+<p id="main-content">
     <div id="shelf-wrapper">
         {% for shelf in shelves %}
         {% if shelf.owner == user %}
@@ -90,6 +88,6 @@
         {% endfor %}
     </div>
     <br>
-</div>
+</p>
 {% endif %}
 {% endblock content %}
