@@ -84,13 +84,7 @@
       </nav>
 
     </div>
-    <div class="content">
-        <div class="sidebar">
-          {% block sidebar %}
-          {% endblock sidebar %}
-        </div>
-        <br>
-        <div class="container">
+    <div id="content">
 
           {% if messages %}
               {% for message in messages %}
@@ -101,8 +95,6 @@
           {% block content %}
             <p>Use this document as a way to quick start any new project.</p>
           {% endblock content %}
-
-        </div> <!-- /container -->
     </div> <!-- /content -->
 
     {% block modal %}{% endblock modal %}

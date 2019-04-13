@@ -1,5 +1,15 @@
 {% extends "base.html" %}
-{% block sidebar %}
+
+{% block content %}
+<div id="sidebar">
+    <div>Hello</div>
+    
+
+</div>
+<div id="main-content">
+    <div>World!</div>
+</div>
+<!--
 <div id="sidebar-wrapper">
     <h4 class="sidebar-content">Sort by:</h4>
     <a href="/?sort=name" class="sidebar-content">
@@ -14,10 +24,9 @@
         <button class="btn btn-outline-secondary my-2 my-sm-0"
             type="sumbit">Owner</button>
     </a>
-</div>
+</div> -->
 
-{% endblock sidebar %}
-{% block content %}
+<!--
 <div id="body-wrapper">
         <div id="shelf-wrapper">
         {% for shelf in shelves %}
@@ -45,4 +54,5 @@
     </div>
     <br>
 </div>
+    -->
 {% endblock content %}

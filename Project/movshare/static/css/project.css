@@ -1,5 +1,29 @@
 /* These styles are generated from project.scss. */
 
+
+/*########  This is my new stuff  ########*/
+
+
+
+
+
+/*######################################*/
+#content {
+    display: flex;
+    flex-direction: row;
+}
+
+#sidebar{
+
+}
+
+#main-content {
+  display: flex;
+  flex-direction: row;
+  padding-left: 20px;
+}
+
+
 .alert-debug {
   color: black;
   background-color: white;
@@ -30,16 +54,7 @@
 #addShelfBlock{
     display:none;
 }
-.sidebar{
-    display: flex;
-    position: fixed;
-    min-width: 15%;
-    max-width: 15%;
-    background-color: rgba(169,169,169, .2);
-    margin: 40px;
-    border-radius:15px;
 
-}
 
 .sidebar div .sidebar-content {
     padding: 6px 8px 6px 16px;
@@ -50,16 +65,7 @@
     block: hidden;
 }
 
-.container {
-    display: flex;
-    align-self: center;
-    flex-direction:column;
-}
 
-.content {
-    display:flex;
-    flex-direction: row;
-}
 
 button.addX{
     display:flex;
