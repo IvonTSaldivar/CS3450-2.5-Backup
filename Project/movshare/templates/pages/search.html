@@ -2,16 +2,17 @@
 
 {% block content %}
 {% load render_table from django_tables2 %}
+<div id="sidebar">
+
+</div>
 <div class="main-content">
   <h3>Search for "{{ search_term }}" returned {{ search_count }} results</h3><br>
 
     {% if search_term %}
       <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
-    <form method="" action="">
       {% csrf_token %}
         <!-- this little guy is rendering and displaying the fancy table-->
       {% render_table table %}
-    </form>
    {% endif %}
   </div>
 

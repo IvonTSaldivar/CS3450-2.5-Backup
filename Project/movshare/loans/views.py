@@ -61,7 +61,8 @@ def requestMedia(request):
                                  message = "")
                 r.save()
                 print("saved")
-    destination = '/library/shelf/view/%s/%s' %(owner, shelf)
+    #destination = '/library/shelf/view/%s/%s' %(owner, shelf)
+    destination = request.META.get('HTTP_REFERER')
     return redirect(destination)
 
 # api for approving request.

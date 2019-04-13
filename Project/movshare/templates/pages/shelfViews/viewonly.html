@@ -2,16 +2,19 @@
 
 {% block content %}
   {% load render_table from django_tables2 %}
+<div id="sidebar">
   <a href="{% url 'home' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
-	<br><br>
+</div>
+<div id="media-content">
+
 	<h3>
 		{{ shelf.owner }} {{ shelf.name }}
 	</h3>
-
     <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
     {% csrf_token %}
       <!-- this little guy is rendering and displaying the fancy table-->
     {% render_table table %}
+</div>
 
 
             <!--old stuff no longer needed. Keeping for posterity-->
