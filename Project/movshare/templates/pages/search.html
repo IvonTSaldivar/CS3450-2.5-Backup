@@ -3,7 +3,7 @@
 {% block content %}
 {% load render_table from django_tables2 %}
 <div class="main-content">
-		<h3>Search for "{{ search_term }}" returned {{ search_results|length }} results</h3><br>
+  <h3>Search for "{{ search_term }}" returned {{ search_count }} results</h3><br>
 
     {% if search_term %}
       <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
