@@ -82,8 +82,9 @@ button.addX{
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    max-width: 80%;
-
+    align-items: center;
+    max-width: 100%;
+    min-width: 80%;
 }
 
 
