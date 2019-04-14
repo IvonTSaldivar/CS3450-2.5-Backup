@@ -66,12 +66,14 @@ def PostMedia(request):
             mediaName = "%s (%d)" % (request.POST.get('name'), count)
         else:
             mediaName = request.POST.get('name')
-        m = Media(name=mediaName,
-                  owner=request.user,
-                  media_type=request.POST.get('type'),
-                  description=request.POST.get('description'),
-                  shelf=Shelf.objects.get(name=request.POST.get('shelf'), owner=request.user))
-        m.save()
+        if mediaName != '':
+
+            m = Media(name=mediaName,
+                      owner=request.user,
+                      media_type=request.POST.get('type'),
+                    description=request.POST.get('description'),
+                    shelf=Shelf.objects.get(name=request.POST.get('shelf'), owner=request.user))
+            m.save()
     return redirect('library:shelf')
 
 

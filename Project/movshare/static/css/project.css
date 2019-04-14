@@ -81,10 +81,9 @@ button.addX{
 #shelf-wrapper {
     display: flex;
     flex-direction: column;
+    text-align:center;
     overflow: hidden;
-    align-items: center;
     max-width: 100%;
-    min-width: 80%;
 }
 
 
