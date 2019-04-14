@@ -123,8 +123,6 @@ button.addX{
     align-items: center;
     line-height: 1.2;
     padding-bottom: 5px;
-    
-    padding-left: 20px;
 }
 .media {
     display: flex;
