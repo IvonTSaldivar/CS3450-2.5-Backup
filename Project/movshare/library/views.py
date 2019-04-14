@@ -85,9 +85,10 @@ def PostShelf(request):
             shelfName = "%s (%d)" % (request.POST.get('name'), count)
         else:
             shelfName = request.POST.get('name')
-        s = Shelf(name=shelfName,
-                  owner=request.user)
-        s.save()
+        if shelfName != '':
+            s = Shelf(name=shelfName,
+                     owner=request.user)
+            s.save()
     return redirect('library:shelf')
 
 

@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
 {% block sidebar %}
-
   {# addShelf button #}
 <div class="sidebar-content">
   <button class="btn btn-outline-primary my-2 my-sm-0"
-          onclick='toggleButton("addMediaBlock");'>
+          onclick='toggleButton("addMediaBlock"); toggleViewMedia()'>
     Add Media
   </button>
   <div id="addMediaBlock" style="display:none;">
@@ -48,7 +47,7 @@
   {# addShelf button #}
 <div class="sidebar-content">
   <button class="btn btn-outline-primary my-2 my-sm-0"
-          type="sumbit" onclick="toggleButton('addShelfBlock')">
+          type="sumbit" onclick="toggleButton('addShelfBlock'); toggleViewShelf()">
     Add Shelf
   </button>
   <div id="addShelfBlock" style="display:none;">
@@ -96,4 +95,21 @@
         {% endfor %}
 </p>
 {% endif %}
+<script>
+  function toggleViewMedia() {
+    if (!document.getElementById("shelf-wrapper").classList.contains("addMediaSelected")) {
+      document.getElementById("shelf-wrapper").classList.add("addMediaSelected");
+    } else {
+      document.getElementById("shelf-wrapper").classList.remove("addMediaSelected");
+    }
+  }
+
+  function toggleViewShelf() {
+    if (!document.getElementById("shelf-wrapper").classList.contains("addShelfSelected")) {
+      document.getElementById("shelf-wrapper").classList.add("addShelfSelected");
+    } else {
+      document.getElementById("shelf-wrapper").classList.remove("addShelfSelected");
+    }
+  }
+</script>
 {% endblock content %}
