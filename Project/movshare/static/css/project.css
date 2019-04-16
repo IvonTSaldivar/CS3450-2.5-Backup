@@ -13,23 +13,21 @@
     flex-direction: row;
 }
 
-#sidebar {
-    display: flex;
-    flex-direction: column;
-    margin: 15px;
-    border-radius: 15px;
-    background-color: rgba(169,169,169, .2);
-}
 
 #main-content {
-  display: flex;
-  flex-direction: row;
-  padding-left: 20px;
-  margin-left: 10%;
+    display: flex;
+    flex-direction: row;
+    flex-basis:80;
+
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    overflow: hidden;
+    max-width: 100%;
 }
 
 .addMediaSelected{
-  margin-left: 30%;
+
 }
 
 .addShelfSelected{
@@ -52,17 +50,27 @@
 #body-wrapper {
     display: flex;
     flex-direction: row;
-    flex-basis: 100%;
     justify-content: space-between;
 }
 
-#sidebar-wrapper {
+
+#sidebar {
     display: flex;
     flex-direction: column;
     position: fixed;
     margin:10px;
+    padding: 10px;
     left: auto;
-    min-width: 10%
+    min-width: 10%;
+    flex-basis:20;
+}
+
+#sidebar-wrapper {
+    padding:10px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: rgba(169,169,169, .2);
 }
 
 #addMediaBlock{
@@ -90,13 +98,6 @@ button.addX{
     margin: 5px;
 }
 
-#shelf-wrapper {
-    display: flex;
-    flex-direction: column;
-    text-align:center;
-    overflow: hidden;
-    max-width: 100%;
-}
 
 
 
