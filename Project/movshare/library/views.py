@@ -62,6 +62,7 @@ def PostMedia(request):
     if request.method == 'POST':
         count = Media.objects.filter(name=request.POST.get('name'), owner=request.user).count()
         mediaName = ''
+        print(count)
         if count != 0:
             mediaName = "%s (%d)" % (request.POST.get('name'), count)
         else:
