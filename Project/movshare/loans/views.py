@@ -5,6 +5,7 @@ from movshare.loans.models import MediaRequest
 from movshare.users.models import User
 from django.contrib.auth.models import AbstractUser
 from .tables import RequestTable
+from .tables import BorrowedTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -62,19 +63,28 @@ def borrowed(request):
     media = set([])
     if(str(request.user) != 'AnonymousUser'):
         
-        theBorrowed = media.objects.filter(borrower = request.user)
+        theBorrowed = Media.objects.filter(borrower = request.user)
 
         for b in theBorrowed:
                 media.add(b)
+                print(b.owner)
 
-        table = RequestTable(media)
+        table = BorrowedTable(media)
         RequestConfig(request).configure(table)
         #context = {'shelf': shelf, 'media': media, 'table': table,}
         context = {'table': table}
-        return render(request, 'pages/requests/requests.html', context)
+        return render(request, 'pages/requests/borrowed.html', context)
     return redirect('home')
 
+def return_media(request):
+    media_id = request.POST.get('media')
+    media= Media.objects.get(id=media_id)
 
+    media.borrower = None;
+    media.is_borrowed = False;
+    media.save();
+
+    return redirect('loans:borrowed')
 
 # api for approving request.
 def approveMedia(request):
