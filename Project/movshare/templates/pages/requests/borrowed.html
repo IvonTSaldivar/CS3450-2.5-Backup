@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block sidebar %}
+  <a href="{% url 'library:shelf' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
+{% endblock sidebar %}
+
 {% block content %}
 {% load render_table from django_tables2 %}
 <h3>Borrowed</h3>
