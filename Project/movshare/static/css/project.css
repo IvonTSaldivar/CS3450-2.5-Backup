@@ -29,6 +29,7 @@ a:hover {
     flex-direction: column;
     margin: 15px;
     border-radius: 15px;
+    padding: 5px;
     background-color: rgba(169,169,169, .2);
 }
 
