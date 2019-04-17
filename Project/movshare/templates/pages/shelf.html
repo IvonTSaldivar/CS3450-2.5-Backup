@@ -1,10 +1,16 @@
 {% extends "base.html" %}
 
 {% block sidebar %}
+<<<<<<< HEAD
 {# addShelf button #}
 <div id="sidebar-wrapper">
   <div class="sidebar-content">
     <button class="btn btn-outline-primary my-2 my-sm-0"
+=======
+  {# addShelf button #}
+  <div class="sidebar-content">
+    <button class="btn btn-outline-light my-2 my-sm-0" style="background-color: #5bb6b8;"
+>>>>>>> 092b1ae2173138664063d53eab4a16b0116ca004
             onclick='toggleButton("addMediaBlock"); toggleViewMedia()'>
       Add Media
     </button>
@@ -47,7 +53,7 @@
   {# end addMedia button #}
   {# addShelf button #}
   <div class="sidebar-content">
-    <button class="btn btn-outline-primary my-2 my-sm-0"
+    <button class="btn btn-outline-light my-2 my-sm-0" style="background-color: #5bb6b8;"
             type="sumbit" onclick="toggleButton('addShelfBlock'); toggleViewShelf()">
       Add Shelf
     </button>
@@ -64,7 +70,6 @@
       </form>
     </div>
   </div>
-</div>
 
 {% endblock sidebar %}
 
@@ -119,3 +124,4 @@
   {% endif %}
 
   {% endblock content %}
+

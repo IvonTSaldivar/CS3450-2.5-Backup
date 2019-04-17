@@ -2,17 +2,20 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
-from .tables import SearchTable, ExpandedShelfTable
+from .tables import SearchTable, ExpandedShelfTable, IMDBSearchTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
 
+from imdbpie import ImdbFacade
+from imdbpie import Imdb
+
 # Create your views here.
 
 def ShelfView(request):
     if not request.user.is_authenticated:
-        return redirect('/accounts/login/?next=library/shelf')
+        return redirect('/accounts/login/?next=/library/shelf')
     if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default',
                                                                                      owner=request.user).count() == 0:
         shelf = Shelf(name='Default', owner=request.user)
@@ -168,7 +171,44 @@ def Search(request):
     table = SearchTable(media)
     RequestConfig(request).configure(table)
 
+    search_count = media.count()
+    table = SearchTable(media)
+    RequestConfig(request).configure(table)
+
     return render(request, 'pages/search.html',
+                  {
+                      'search_term': search_term,
+                      'table': table,
+                      'search_count' : search_count
+                  }
+                  )
+
+def IMDBSearch(request):
+    client = Imdb(locale='en_US')
+    imdb = ImdbFacade(client=client)
+    imdb2 = Imdb()
+    results2 = set([])
+
+    search_term = ''
+
+    if 'search' in request.GET and request.GET['search'] is not '':
+        search_term = request.GET['search']
+
+        results = imdb2.search_for_title(search_term)
+    else:
+        results = Media.objects.none()
+
+    ## Attempting to get the more detailed information, It works, sorta, but it'a really slow.
+    # for r in results:
+    #     results2.add(r.imdb_id)
+    # for r in results2:
+    #     print(imdb2.get_title(r)
+
+    search_count = 0
+    table = IMDBSearchTable(results)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'pages/IMDBsearch.html',
                   {
                       'search_term': search_term,
                       'table': table,

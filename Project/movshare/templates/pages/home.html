@@ -1,51 +1,53 @@
 {% extends "base.html" %}
 
+
+
 {% block sidebar %}
-<div id="sidebar-wrapper">
-<h4 class="sidebar-content">Sort by:</h4>
-<a href="/?sort=name" class="sidebar-content">
-  <button class="btn btn-outline-secondary my-2 my-sm-0"
-          type="sumbit">
-    Name
-  </button>
-</a>
-<a href="/?sort=media_type" class="sidebar-content">
-  <button class="btn btn-outline-secondary my-2 my-sm-0"
-          type="sumbit">
-    Type
-  </button>
-</a>
-<a href="/?sort=owner" class="sidebar-content">
-  <button class="btn btn-outline-secondary my-2 my-sm-0"
-          type="sumbit">
-    Owner
-  </button>
-</a>
-</div>
+  <h4 class="sidebar-content">Sort by:</h4>
+  <a href="/?sort=name">
+    <button class="btn my-2 my-sm-0 btn-outline-light" style="background-color: #5bb6b8;"
+            type="submit">
+      Name
+    </button>
+  </a>
+  <a href="/?sort=media_type">
+    <button class="btn my-2 my-sm-0 btn-outline-light" style="background-color: #5bb6b8;"
+            type="submit">
+      Type
+    </button>
+  </a>
+  <a href="/?sort=owner">
+    <button class="btn my-2 my-sm-0 btn-outline-light" style="background-color: #5bb6b8;"
+            type="submit">
+      Owner
+    </button>
+  </a>
+
 {% endblock sidebar %}
 
 {% block content %}
-      {% for shelf in shelves %}
-<div class="shelf">
-  <div class="shelf-title">
-    <a href="{% url 'library:viewonlyshelf' shelf.owner|urlencode shelf.name|urlencode %}">
-      <h3>
-        {{ shelf.owner }} {{ shelf.name }}
-      </h3>
-    </a>
-  </div>
-  <div class="shelf-content">
-    {% for medium in media %}
-    {% if medium.shelf == shelf %}
-    <div class="media">
-      <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
-      <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
-      <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
-    </div>
-    {% endif %}
-    {% endfor %}
-  </div>
-</div>
-      {% endfor %}
+
+  {% for shelf in shelves %}
+    <div class="shelf">
+      <div class="shelf-title">
+        <a href="{% url 'library:viewonlyshelf' shelf.owner|urlencode shelf.name|urlencode %}">
+          <h3>
+            {{ shelf.owner }} {{ shelf.name }}
+          </h3>
+        </a>
       </div>
+      <div class="shelf-content">
+        {% for medium in media %}
+          {% if medium.shelf == shelf %}
+            <div class="media">
+              <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
+              <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
+              <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endfor %}
+
 {% endblock content %}
