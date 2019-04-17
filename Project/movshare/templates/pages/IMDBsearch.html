@@ -3,7 +3,9 @@
 {% load render_table from django_tables2 %}
 
 {% block sidebar %}
-
+  <a href="{% url 'home' %}">
+    <button type="button" class="btn btn-light btn-sm">Go Back</button>
+  </a>
 {% endblock sidebar %}
 
 {% block content %}
@@ -15,18 +17,15 @@
            name="search">
     <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
   </form>
-<h3>Search for "{{ search_term }}" returned {{ search_count }} results</h3><br>
 
     {% if search_term %}
 <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
       {% csrf_token %}
 <!-- this little guy is rendering and displaying the fancy table-->
       {% render_table table %}
-   {% endif %}
+  {% else %}
+      <h3>This page demonstates the abilities to search through the IMDB database.</h3><br>
+  {% endif %}
+
 
 {% endblock content %}
-	{% comment %}
-	{% else %}
-<h3>Search for "" was inconclusive</h3>
-	{% endif %}
-	{% endcomment %}

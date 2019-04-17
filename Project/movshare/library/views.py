@@ -205,7 +205,6 @@ def IMDBSearch(request):
     # for r in results2:
     #     print(imdb2.get_title(r)
 
-    search_count = 0
     table = IMDBSearchTable(results)
     RequestConfig(request).configure(table)
 
@@ -213,6 +212,5 @@ def IMDBSearch(request):
                   {
                       'search_term': search_term,
                       'table': table,
-                      'search_count' : search_count
                   }
                   )
