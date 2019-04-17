@@ -18,7 +18,6 @@ def requestsView(request):
     if not request.user.is_authenticated:
         return redirect('/accounts/login/?next=/loans/requests')
     media = set([])
-    print(request.user)
     if(str(request.user) != 'AnonymousUser'):
         
         theRequests = MediaRequest.objects.all()
@@ -26,9 +25,6 @@ def requestsView(request):
         for r in theRequests:
             if(r.media.owner == request.user):
                 media.add(r)
-                print(r.media.owner)
-                print(r.media.name)
-
 
         table = RequestTable(media)
         RequestConfig(request).configure(table)
@@ -40,7 +36,6 @@ def requestsView(request):
 
 # api for adding request to database
 def requestMedia(request):
-    print(str(request.method))
     owner = request.POST.get('media_owner')
     shelf = request.POST.get('shelf_name')
     if request.method == 'POST' and str(request.user) != 'AnonymousUser':
@@ -49,10 +44,6 @@ def requestMedia(request):
         if requester != request.POST.get('media_owner'):
             mediaName = urllib.parse.unquote(request.POST.get('media_name'))
 
-            print(urllib.parse.unquote(request.POST.get('media_name')))
-            print(str(requester))
-            print(request.POST.get('media_owner'))
-
             count = MediaRequest.objects.filter(media = Media.objects.get(name = mediaName, owner = mediaOwner)).count()
 
             if count == 0:
@@ -60,17 +51,20 @@ def requestMedia(request):
                                  media = Media.objects.get(name = mediaName, owner = mediaOwner),
                                  message = "")
                 r.save()
-                print("saved")
     #destination = '/library/shelf/view/%s/%s' %(owner, shelf)
     destination = request.META.get('HTTP_REFERER')
     return redirect(destination)
 
 # api for approving request.
 def approveMedia(request):
-
-
-    return redirect('library:shelf')
+    media = request.POST.get('media')
+    media_request = MediaRequest.objects.get(media=media)
+    media = Media.objects.get(id=media)
+    media.borrower = media_request.requester
+    media.is_borrowed = True 
+    media.save()
+    media_request.delete()
+    return redirect('loans:requests')
 
 # api for rejecting request.
-
 # api for approving request
