@@ -91,7 +91,8 @@
         </div>
         {% endif %}
         {% endfor %}
-<<<<<<< HEAD
+        {% endif %}
+        {% endfor %}
 <div class="shelf">
   <div class="shelf-title">
     <a href="{% url 'library:shelf' %}">
@@ -115,41 +116,5 @@
 
 </p>
 {% endif %}
-<script>
-  function toggleViewMedia() {
-    return;
-    if (!document.getElementById("shelf-wrapper").classList.contains("addMediaSelected")) {
-      document.getElementById("shelf-wrapper").classList.add("addMediaSelected");
-    } else {
-      document.getElementById("shelf-wrapper").classList.remove("addMediaSelected");
-=======
-    </div>
-</div>
-{% endif %}
-{% endfor %}
-</p>
-{% endif %}
-<script>
-    function toggleViewMedia() {
-        if (!document.getElementById("shelf-wrapper").classList.contains("addMediaSelected")) {
-            document.getElementById("shelf-wrapper").classList.add("addMediaSelected");
-        } else {
-            document.getElementById("shelf-wrapper").classList.remove("addMediaSelected");
-        }
->>>>>>> 527b97e81d728d26ff422008db4a401838e71b8d
-    }
 
-<<<<<<< HEAD
-  function toggleViewShelf() {
-    return;
-=======
-function toggleViewShelf() {
->>>>>>> 527b97e81d728d26ff422008db4a401838e71b8d
-    if (!document.getElementById("shelf-wrapper").classList.contains("addShelfSelected")) {
-        document.getElementById("shelf-wrapper").classList.add("addShelfSelected");
-    } else {
-        document.getElementById("shelf-wrapper").classList.remove("addShelfSelected");
-    }
-}
-</script>
 {% endblock content %}
