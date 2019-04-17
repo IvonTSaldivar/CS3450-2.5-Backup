@@ -12,11 +12,11 @@
         {% csrf_token %}
         <div>
           <label for="name">Media Name: </label>
-          <input type="text" id="name" name="name">
+          <input class="form-control" type="text" id="name" name="name">
         </div>
-        <div>
+        <div class="form-group">
           <label for="type">Media Type: </label>
-          <select name="type" id="type">
+          <select class="form-control" name="type" id="type">
             <option value="movie">Movie</option>
             <option value="game">Game</option>
             <option value="music">Music</option>
@@ -25,11 +25,11 @@
         </div>
         <div>
           <label for="description">Description:</label>
-          <textarea type="text" id="description" name="description"></textarea>
+          <textarea class="form-control" type="text" id="description" name="description"></textarea>
         </div>
-        <div>
+        <div class="form-group">
           <label for="shelf">Shelf Name:</label>
-          <select id="shelf" name="shelf">
+          <select class="form-control" id="shelf" name="shelf">
             {% for shelf in shelves %}
             {% if shelf.owner == user %}
             <option value="{{ shelf.name }}"> {{ shelf.name }}</option>
@@ -38,16 +38,14 @@
           </select>
         </div>
         <div>
-          <button onClick="document.getElementById('addMediaForm').submit()">Submit</button>
+          <button class="btn-outline-light" style="background-color: #5c5bb8;" onClick="document.getElementById('addMediaForm').submit()">Submit</button>
         </div>
       </form>
     </div>
   </div>
-  {# end addMedia button #}
-  {# addShelf button #}
   <div class="sidebar-content">
     <button class="btn btn-outline-light my-2 my-sm-0" style="background-color: #5bb6b8;"
-            type="sumbit" onclick="toggleButton('addShelfBlock'); toggleViewShelf()">
+            type="submit" onclick="toggleButton('addShelfBlock'); toggleViewShelf()">
       Add Shelf
     </button>
     <div id="addShelfBlock" style="display:none;">
@@ -55,14 +53,15 @@
         {% csrf_token %}
         <div>
           <label for="name">Shelf Name:</label>
-          <input type="text" id="name" name="name">
+          <input class="form-control" type="text" id="name" name="name">
         </div>
         <div>
-          <button onclick="document.getElementById('addShelfForm').submit()">Submit</button>
+          <button class="btn-outline-light" style="background-color: #5c5bb8;" onclick="document.getElementById('addShelfForm').submit()">Submit</button>
         </div>
       </form>
     </div>
   </div>
+
 
 {% endblock sidebar %}
 
