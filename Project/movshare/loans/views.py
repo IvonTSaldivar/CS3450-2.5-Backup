@@ -55,6 +55,27 @@ def requestMedia(request):
     destination = request.META.get('HTTP_REFERER')
     return redirect(destination)
 
+def borrowed(request):
+    #redirect if not logged in not working not sure why. May need to register loans as an app?
+    if not request.user.is_authenticated:
+        return redirect('/accounts/login/?next=/loans/borrowed')
+    media = set([])
+    if(str(request.user) != 'AnonymousUser'):
+        
+        theBorrowed = media.objects.filter(borrower = request.user)
+
+        for b in theBorrowed:
+                media.add(b)
+
+        table = RequestTable(media)
+        RequestConfig(request).configure(table)
+        #context = {'shelf': shelf, 'media': media, 'table': table,}
+        context = {'table': table}
+        return render(request, 'pages/requests/requests.html', context)
+    return redirect('home')
+
+
+
 # api for approving request.
 def approveMedia(request):
     media = request.POST.get('media')
