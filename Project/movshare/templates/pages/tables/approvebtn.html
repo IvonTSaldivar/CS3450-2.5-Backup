@@ -1,8 +1,7 @@
 <!-- you can use record.name to get the element's name or record.media_type to get it's type
       or record. anything else to get that value for the element that has been clicked on. -->
-<form method="POST" action="{% url 'loans:approveMedia' %}" id="approve_media_{{ record.name }}">
+<form method="POST" action="{% url 'loans:approveMedia' %}" id="approve_media_{{ record.media.id }}">
   {% csrf_token %}
-  <input type="hidden" name="owner_name" value="{{ user.username|urlencode }}">
-  <input type="hidden" name="media_name" value="{{ record.name }}">
-  <a href="#" class="btn btn-info btn-sm" onclick="document.getElementById('=approve_media_{{ record.name }}').submit();">Approve</a>
+  <input type="hidden" name="media" value="{{ record.media.id }}">
+  <a href="#" class="btn btn-info btn-sm" onclick="document.getElementById('approve_media_{{ record.media.id }}').submit();">Approve</a>
 </form>
