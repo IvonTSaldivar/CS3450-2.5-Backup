@@ -136,11 +136,12 @@ def ViewOnlyShelf(request, username, encoded_shelf):
 
 
 def DeleteMedia(request):
-    media = Media.objects.get(name=request.POST.get('media_name'),
-                              owner=request.user)
+    media = Media.objects.filter(name=request.POST.get('media_name'),
+                              owner=request.user).first()
     encodedShelfName = request.POST.get('shelf_name')
     encodedUserName = request.POST.get('user_name')
-    media.delete()
+    if media is not None:
+        media.delete()
     destination = '/library/shelf/%s/%s' % (encodedUserName, encodedShelfName)
     return redirect(destination)
 
