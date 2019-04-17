@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block sidebar %}
-
+<div id="sidebar-wrapper">
 <h4 class="sidebar-content">Sort by:</h4>
 <a href="/?sort=name" class="sidebar-content">
   <button class="btn btn-outline-secondary my-2 my-sm-0"
@@ -21,6 +21,7 @@
     Owner
   </button>
 </a>
+</div>
 {% endblock sidebar %}
 
 {% block content %}
