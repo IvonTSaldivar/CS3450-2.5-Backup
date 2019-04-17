@@ -67,7 +67,7 @@ def requestMedia(request):
 
 # api for approving request.
 def approveMedia(request):
-
+    print("hello there")
 
     return redirect('library:shelf')
 

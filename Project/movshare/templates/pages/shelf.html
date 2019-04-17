@@ -91,6 +91,38 @@
         </div>
         {% endif %}
         {% endfor %}
+<<<<<<< HEAD
+<div class="shelf">
+  <div class="shelf-title">
+    <a href="{% url 'library:shelf' %}">
+      <h3>
+        Borrowed
+      </h3>
+    </a>
+  </div>
+  <div class="shelf-content">
+    {% for medium in media %}
+    {% if medium.borrower == user %}
+    <div class="media">
+      <div class="media-content underline"> {{ medium.name|truncatechars:18 }}</div>
+      <div class="media-content underline"> {{ medium.media_type|truncatechars:20 }}</div>
+      <div class="media-content"> {{ medium.description|truncatechars:24 }}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+</p>
+{% endif %}
+<script>
+  function toggleViewMedia() {
+    return;
+    if (!document.getElementById("shelf-wrapper").classList.contains("addMediaSelected")) {
+      document.getElementById("shelf-wrapper").classList.add("addMediaSelected");
+    } else {
+      document.getElementById("shelf-wrapper").classList.remove("addMediaSelected");
+=======
     </div>
 </div>
 {% endif %}
@@ -104,9 +136,15 @@
         } else {
             document.getElementById("shelf-wrapper").classList.remove("addMediaSelected");
         }
+>>>>>>> 527b97e81d728d26ff422008db4a401838e71b8d
     }
 
+<<<<<<< HEAD
+  function toggleViewShelf() {
+    return;
+=======
 function toggleViewShelf() {
+>>>>>>> 527b97e81d728d26ff422008db4a401838e71b8d
     if (!document.getElementById("shelf-wrapper").classList.contains("addShelfSelected")) {
         document.getElementById("shelf-wrapper").classList.add("addShelfSelected");
     } else {
