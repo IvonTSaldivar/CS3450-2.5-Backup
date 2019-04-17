@@ -2,8 +2,8 @@
         or record. anything else to get that value for the element that has been clicked on. -->
 <form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media_{{ record.name }}">
     {% csrf_token %}
-	<input type="hidden" name="shelf_name" value="{{ record.shelf.name|urlencode }}">
-	<input type="hidden" name="user_name" value="{{ user.username|urlencode }}">
-	<input type="hidden" name="media_name" value="{{ record.name }}">
-	<a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete_media_{{ record.name }}').submit();">delete</a>
+    <input type="hidden" name="shelf_name" value="{{ record.shelf.name|urlencode }}">
+    <input type="hidden" name="user_name" value="{{ user.username|urlencode }}">
+    <input type="hidden" name="media_name" value="{{ record.name }}">
+    <a href="#" class="btn btn-outline-danger" onclick="document.getElementById('delete_media_{{ record.name }}').submit();">delete</a>
  </form>
