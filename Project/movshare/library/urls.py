@@ -21,3 +21,4 @@ urlpatterns = [
     path('IMDBsearch', view=IMDBSearch, name='IMDBsearch'),
     path('', view=ShelfView, name='home'),
 ]
+

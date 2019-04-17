@@ -2,64 +2,24 @@
 
 {% load render_table from django_tables2 %}
 
-{% block sidebar %}
-<a href="{% url 'home' %}"><button type="button" class="btn btn-light btn-sm">Go Back</button></a>
-{% endblock sidebar %}
-
-
 {% block content %}
-<h3>
-  {{ shelf.owner }} {{ shelf.name }}
-</h3>
-<!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
-    {% csrf_token %}
-<!-- this little guy is rendering and displaying the fancy table-->
-    {% render_table table %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-1 text-center">
+        <a href="{% url 'home' %}">
+          <button type="button" class="btn btn-light btn-sm">Go Back</button>
+        </a>
+      </div>
+      <div class="col-md-2 text-center"></div>
+      <div class="col-md-8 text-center">
+        <h3>
+          {{ shelf.owner }} {{ shelf.name }}
+        </h3>
+        <!-- stuff in form can be used for the loan button, see delete functionality in expandedshelf.html for reference.-->
+        {% csrf_token %}
+        <!-- this little guy is rendering and displaying the fancy table-->
+        {% render_table table %}
+      </div>
+    </div>
+  </div>
 {% endblock content %}
-
-
-
-<!--old stuff no longer needed. Keeping for posterity-->
-{#  <table style="width:100%" class="media-table">
-  #}
-  {#
-  <tr>
-    #}
-    {#
-    <th>Title</th>#}
-    {#
-    <th>Media Type</th>#}
-    {#
-    <th>Description</th>#}
-    {#
-  </tr>#}
-  {#	{% for medium in media %}#}
-  {#		{% if medium.shelf == shelf %}#}
-  {#
-  <tr>
-    #}
-    {#
-    <td>{{ medium.name }}</td>#}
-    {#
-    <td>{{ medium.media_type}}</td>#}
-    {#
-    <td>{{ medium.description }}</td>#}
-    {#
-    <td class='url'>
-      #}
-      {#						<form method="POST" action="{% url 'library:deleteMedia' %}" id="delete_media">
-        #}
-        {#								{% csrf_token %}#}
-        {#								<input type="hidden" name="media_name" value="{{ media.name|urlencode }}">#}
-        {#								<input type="hidden" name="media_shelf" value="{{ media.shelf.name|urlencode }}">#}
-        {#								<input type="hidden" name="media_owner" value="{{ media.owner.username|urlencode }}">#}
-        {#								<a href="#">Request Loan</a>#}
-        {#
-      </form>#}
-      {#
-  </tr>#}
-  {#		{% endif %}#}
-  {#	{% endfor %}#}
-  {#
-</table>#}
-<br>

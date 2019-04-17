@@ -5,7 +5,16 @@
 
 
 body {
-  background: #5BB85D !important;
+  background: #fafafa !important;
+}
+
+a {
+  color: #000000;
+}
+
+a:hover {
+  color: #c8c8c8;
+  text-decoration: none;
 }
 
 
@@ -27,7 +36,7 @@ body {
   display: flex;
   flex-direction: row;
   padding-left: 20px;
-  margin-left: 10%;
+  /*margin-left: 10%;*/
 }
 
 .addMediaSelected{
@@ -86,7 +95,6 @@ body {
 }
 
 
-
 button.addX{
     display:flex;
     margin: 5px;
@@ -99,7 +107,6 @@ button.addX{
     overflow: hidden;
     max-width: 100%;
 }
-
 
 
 .shelf {
@@ -117,6 +124,7 @@ button.addX{
 .shelf-content {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     overflow: scroll;
 }
 
@@ -155,6 +163,7 @@ button.addX{
 .media-table {
 
 }
+
 .media-table td, .media-table th {
     padding-left: 15px;
     min-width: 125px;
