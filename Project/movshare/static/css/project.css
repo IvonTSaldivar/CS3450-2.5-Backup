@@ -126,7 +126,7 @@ button.addX{
 .shelf-content {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    max-width: 700px;
     overflow: scroll;
 }
 
