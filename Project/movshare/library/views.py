@@ -64,6 +64,10 @@ def PostMedia(request):
         mediaName = ''
         print(count)
         if count != 0:
+            newCount = 1
+            while newCount != 0:
+                newCount = Media.objects.filter(name=request.POST.get('name') + ' (' + str(count) + ')', owner=request.user).count()
+                count += newCount 
             mediaName = "%s (%d)" % (request.POST.get('name'), count)
         else:
             mediaName = request.POST.get('name')

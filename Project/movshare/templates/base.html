@@ -91,26 +91,22 @@
 
 
     <div id="content">
-      <div id="sidebar-wrapper">
         <div id="sidebar">
           {% block sidebar %}
 
           {% endblock sidebar %}
         </div>
 
-      </div>
-      <div id="main-content">
-        <div id="shelf-wrapper">
-          {% block content %}
-          {% if messages %}
-          {% for message in messages %}
-          <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-          {% endif %}
+        <div id="main-content">
+            {% block content %}
+               {% if messages %}
+                 {% for message in messages %}
+                      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+                 {% endfor %}
+               {% endif %}
+               <p>Use this document as a way to quick start any new project.</p>
+             {% endblock content %}
         </div>
-        <p>Use this document as a way to quick start any new project.</p>
-        {% endblock content %}
-      </div>
     </div>
 
 
