@@ -1,3 +1,4 @@
+
 /* These styles are generated from project.scss. */
 
 
@@ -27,26 +28,25 @@ a:hover {
 #sidebar {
     display: flex;
     flex-direction: column;
-    margin: 10px;
-    min-width: 10%;
-    position: fixed;
-    margin:10px;
+    margin: 15px;
     padding: 10px;
-    left: auto;
-    min-width: 10%;
-    flex-basis:2;
+    border-radius: 15px;
+    background-color: rgba(169,169,169, .2);
 }
 
 #main-content {
   display: flex;
   flex-direction: row;
   padding-left: 20px;
+  /*margin-left: 10%;*/
 }
 
 .addMediaSelected{
+  margin-left: 30%;
 }
 
 .addShelfSelected{
+  margin-left: 28%;
 }
 
 
@@ -65,9 +65,18 @@ a:hover {
 #body-wrapper {
     display: flex;
     flex-direction: row;
+    flex-basis: 100%;
     justify-content: space-between;
 }
 
+#sidebar-wrapper {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    margin:10px;
+    left: auto;
+    min-width: 10%
+}
 
 #addMediaBlock{
     display: none;
@@ -94,12 +103,13 @@ button.addX{
 }
 
 #shelf-wrapper {
-    padding:10px;
     display: flex;
     flex-direction: column;
-    border-radius: 15px;
-    background-color: rgba(169,169,169, .2);
+    text-align:center;
+    overflow: hidden;
+    max-width: 100%;
 }
+
 
 .shelf {
     display: flex;
@@ -171,5 +181,3 @@ button.addX{
 
     background-color: rgba(169,169,169, .2);
 }
-
-
