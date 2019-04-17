@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
-from .tables import SearchTable, ExpandedShelfTable, IMDBSearchTable
+from .tables import SearchTable, ExpandedShelfTable, IMDBSearchTable, ViewAllTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
@@ -32,7 +32,7 @@ def HomeView(request):
     if 'sort' in request.GET:
         sort = request.GET['sort']
     else:
-        sort = 'name'
+        sort = 'name' #this is the default sort
 
     media = Media.objects.order_by(sort)
 
@@ -47,6 +47,23 @@ def HomeView(request):
     return render(request, 'pages/home.html', context,)
 
 # user_list_view = UserListView.as_view()
+
+def viewAll(request):
+    media = set([])
+    owners = User(name ="All")
+    shelf = Shelf(name='All', owner=owners)
+
+    for medium in Media.objects.all():
+        media.add(medium)
+
+    table = ViewAllTable(media)
+
+
+    RequestConfig(request).configure(table)
+    print("here!")
+    context = {'shelf': shelf, 'media': media, 'table': table,}
+    return render(request, 'pages/shelfViews/viewonly.html',context,)
+
 
 def AddMediaView(request):
     shelves = Shelf.objects.all();
