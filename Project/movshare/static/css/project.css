@@ -1,10 +1,22 @@
+
 /* These styles are generated from project.scss. */
 
 
 /*########  This is my new stuff  ########*/
 
 
+body {
+  background: #fafafa !important;
+}
 
+a {
+  color: #000000;
+}
+
+a:hover {
+  color: #c8c8c8;
+  text-decoration: none;
+}
 
 
 /*######################################*/
@@ -17,8 +29,9 @@
     display: flex;
     flex-direction: column;
     margin: 15px;
-    padding: 15px;
+    padding: 10px;
     border-radius: 15px;
+    padding: 5px;
     background-color: rgba(169,169,169, .2);
 }
 
@@ -26,14 +39,15 @@
   display: flex;
   flex-direction: row;
   padding-left: 20px;
-  margin-left: 10%;
-  overflow:hidden;
+  /*margin-left: 10%;*/
 }
 
 .addMediaSelected{
+  margin-left: 30%;
 }
 
 .addShelfSelected{
+  margin-left: 28%;
 }
 
 
@@ -84,7 +98,6 @@
 }
 
 
-
 button.addX{
     display:flex;
     margin: 5px;
@@ -97,7 +110,6 @@ button.addX{
     overflow: hidden;
     max-width: 100%;
 }
-
 
 
 .shelf {
@@ -115,6 +127,7 @@ button.addX{
 .shelf-content {
     display: flex;
     flex-direction: row;
+    max-width: 700px;
     overflow: scroll;
 }
 
@@ -153,6 +166,7 @@ button.addX{
 .media-table {
 
 }
+
 .media-table td, .media-table th {
     padding-left: 15px;
     min-width: 125px;
@@ -168,5 +182,3 @@ button.addX{
 
     background-color: rgba(169,169,169, .2);
 }
-
-

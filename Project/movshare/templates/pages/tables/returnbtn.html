@@ -1,0 +1,7 @@
+<!-- you can use record.name to get the element's name or record.media_type to get it's type
+      or record. anything else to get that value for the element that has been clicked on. -->
+<form method="POST" action="{% url 'loans:return_media' %}" id="return_media_{{ record.id }}">
+  {% csrf_token %}
+  <input type="hidden" name="media" value="{{ record.id }}">
+  <a href="#" class="btn btn-info btn-sm" onclick="document.getElementById('return_media_{{ record.id }}').submit();">Return</a>
+</form>

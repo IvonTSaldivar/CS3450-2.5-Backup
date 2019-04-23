@@ -9,6 +9,7 @@ __pycache__/
 *.sqlite
 *.vs
 *.onetoc2
+*.bak_000f
 
 
 # C extensions

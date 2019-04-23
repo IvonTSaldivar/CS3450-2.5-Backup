@@ -2,17 +2,20 @@ from django.shortcuts import render, redirect
 from movshare.library.models import Shelf
 from movshare.library.models import Media
 from movshare.users.models import User
-from .tables import SearchTable, ExpandedShelfTable
+from .tables import SearchTable, ExpandedShelfTable, IMDBSearchTable, ViewAllTable
 from django_tables2 import RequestConfig
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 import urllib.parse
 
+from imdbpie import ImdbFacade
+from imdbpie import Imdb
+
 # Create your views here.
 
 def ShelfView(request):
     if not request.user.is_authenticated:
-        return redirect('/accounts/login/?next=library/shelf')
+        return redirect('/accounts/login/?next=/library/shelf')
     if Shelf.objects.filter(owner=request.user).count() == 0 or Shelf.objects.filter(name='Default',
                                                                                      owner=request.user).count() == 0:
         shelf = Shelf(name='Default', owner=request.user)
@@ -29,7 +32,7 @@ def HomeView(request):
     if 'sort' in request.GET:
         sort = request.GET['sort']
     else:
-        sort = 'name'
+        sort = 'name' #this is the default sort
 
     media = Media.objects.order_by(sort)
 
@@ -44,6 +47,23 @@ def HomeView(request):
     return render(request, 'pages/home.html', context,)
 
 # user_list_view = UserListView.as_view()
+
+def viewAll(request):
+    media = set([])
+    owners = User(name ="All")
+    shelf = Shelf(name='All', owner=owners)
+
+    for medium in Media.objects.all():
+        media.add(medium)
+
+    table = ViewAllTable(media)
+
+
+    RequestConfig(request).configure(table)
+    print("here!")
+    context = {'shelf': shelf, 'media': media, 'table': table,}
+    return render(request, 'pages/shelfViews/viewonly.html',context,)
+
 
 def AddMediaView(request):
     shelves = Shelf.objects.all();
@@ -62,7 +82,12 @@ def PostMedia(request):
     if request.method == 'POST':
         count = Media.objects.filter(name=request.POST.get('name'), owner=request.user).count()
         mediaName = ''
+        print(count)
         if count != 0:
+            newCount = 1
+            while newCount != 0:
+                newCount = Media.objects.filter(name=request.POST.get('name') + ' (' + str(count) + ')', owner=request.user).count()
+                count += newCount 
             mediaName = "%s (%d)" % (request.POST.get('name'), count)
         else:
             mediaName = request.POST.get('name')
@@ -128,11 +153,12 @@ def ViewOnlyShelf(request, username, encoded_shelf):
 
 
 def DeleteMedia(request):
-    media = Media.objects.get(name=request.POST.get('media_name'),
-                              owner=request.user)
+    media = Media.objects.filter(name=request.POST.get('media_name'),
+                              owner=request.user).first()
     encodedShelfName = request.POST.get('shelf_name')
     encodedUserName = request.POST.get('user_name')
-    media.delete()
+    if media is not None:
+        media.delete()
     destination = '/library/shelf/%s/%s' % (encodedUserName, encodedShelfName)
     return redirect(destination)
 
@@ -163,10 +189,45 @@ def Search(request):
     table = SearchTable(media)
     RequestConfig(request).configure(table)
 
+    search_count = media.count()
+    table = SearchTable(media)
+    RequestConfig(request).configure(table)
+
     return render(request, 'pages/search.html',
                   {
                       'search_term': search_term,
                       'table': table,
                       'search_count' : search_count
+                  }
+                  )
+
+def IMDBSearch(request):
+    client = Imdb(locale='en_US')
+    imdb = ImdbFacade(client=client)
+    imdb2 = Imdb()
+    results2 = set([])
+
+    search_term = ''
+
+    if 'search' in request.GET and request.GET['search'] is not '':
+        search_term = request.GET['search']
+
+        results = imdb2.search_for_title(search_term)
+    else:
+        results = Media.objects.none()
+
+    ## Attempting to get the more detailed information, It works, sorta, but it'a really slow.
+    # for r in results:
+    #     results2.add(r.imdb_id)
+    # for r in results2:
+    #     print(imdb2.get_title(r)
+
+    table = IMDBSearchTable(results)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'pages/IMDBsearch.html',
+                  {
+                      'search_term': search_term,
+                      'table': table,
                   }
                   )
